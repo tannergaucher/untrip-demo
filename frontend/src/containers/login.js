@@ -14,7 +14,7 @@ const LOG_IN_MUTATION = gql`
   }
 `
 
-export default function login() {
+export default function() {
   const [values, setValues] = useState({ email: "", password: "" })
 
   const handleChange = e => {
@@ -43,9 +43,9 @@ export default function login() {
           <Button
             type="submit"
             label="Log In"
-            primary
             disabled={loading}
             margin={{ vertical: "medium" }}
+            primary
           />
         </Form>
       )}

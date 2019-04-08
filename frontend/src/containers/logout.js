@@ -11,7 +11,7 @@ const LOGOUT_MUTATION = gql`
   }
 `
 
-export default function logout() {
+export default function() {
   const logout = useMutation(LOGOUT_MUTATION)
 
   return <Button onClick={logout} label="Log Out" />

@@ -18,7 +18,7 @@ const POSTS_QUERY = gql`
   }
 `
 
-export default function FromApolloQuery() {
+export default function() {
   const { data, loading, error } = useQuery(POSTS_QUERY, {
     context: {
       uri: `https://api-apeast.graphcms.com/v1/cju7s4frq3f1a01fcdq560ewi/master`, // query the CMS instead of the backend

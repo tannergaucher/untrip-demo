@@ -2,7 +2,7 @@ import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Post from "../components/post"
 
-export default function FromGatsbyStaticQuery() {
+export default function() {
   const { gcms } = useStaticQuery(
     graphql`
       query {

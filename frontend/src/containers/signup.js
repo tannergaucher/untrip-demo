@@ -18,9 +18,8 @@ const SIGN_UP_MUTATION = gql`
   }
 `
 
-export default function signup() {
+export default function() {
   const [values, setValues] = useState({ name: "", email: "", password: "" })
-
   const handleChange = e => {
     const { name, value } = e.target
     setValues({ ...values, [name]: value })
@@ -54,9 +53,9 @@ export default function signup() {
           <Button
             type="submit"
             label="Sign up"
-            primary
             disabled={loading}
             margin={{ vertical: "medium" }}
+            primary
           />
         </Form>
       )}
