@@ -1,4 +1,5 @@
-endpoint: https://eu1.prisma.sh/tanner-gaucher/testdemo/dev
+#endpoint: ''
+endpoint: https://eu1.prisma.sh/tanner-gaucher/untripdemo/dev
 
 datamodel: datamodel.prisma
 

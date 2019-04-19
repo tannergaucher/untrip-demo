@@ -213,6 +213,7 @@ export interface PlaceWhereInput {
 
 export type UserWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
+  email?: String;
 }>;
 
 export interface UserWhereInput {
@@ -281,6 +282,7 @@ export interface UserWhereInput {
 }
 
 export interface PlaceCreateInput {
+  id?: ID_Input;
   gcmsId: String;
 }
 
@@ -293,6 +295,7 @@ export interface PlaceUpdateManyMutationInput {
 }
 
 export interface UserCreateInput {
+  id?: ID_Input;
   name: String;
   email: String;
   password: String;

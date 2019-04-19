@@ -6,7 +6,7 @@ import { Button } from "grommet"
 const LOGOUT_MUTATION = gql`
   mutation LOGOUT_MUTATION {
     logout {
-      successmessage
+      message
     }
   }
 `

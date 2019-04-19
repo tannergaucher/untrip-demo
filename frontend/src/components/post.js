@@ -6,7 +6,7 @@ const post = ({ description, title, id, image }) => (
     <h6>{description}</h6>
     <h1>{title}</h1>
     <h6>ID: {id}</h6>
-    <GraphImg image={image} maxWidth={800} />
+    <GraphImg image={image} maxWidth={300} />
   </div>
 )
 

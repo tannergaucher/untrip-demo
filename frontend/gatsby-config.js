@@ -1,9 +1,6 @@
-const fetch = require(`isomorphic-fetch`)
-const createHttpLink = require(`apollo-link`)
-
 module.exports = {
   siteMetadata: {
-    title: `untrip-demo`,
+    title: `Gatsby App: Turn Static Data Dynamic`,
     description: ``,
     author: `tannermichaelgaucher@gmail.com`,
   },

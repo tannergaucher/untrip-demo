@@ -25,6 +25,8 @@ const Mutation = {
     }
   },
   login: async (parent, { email, password }, context) => {
+    console.log(email, password)
+
     const user = await context.prisma.user({ email })
 
     if (!user) {
@@ -32,6 +34,7 @@ const Mutation = {
     }
 
     const passwordValid = await compare(password, user.password)
+
     if (!passwordValid) {
       throw new Error(`Invalid Password`)
     }

@@ -61,6 +61,7 @@ type PlaceConnection {
 }
 
 input PlaceCreateInput {
+  id: ID
   gcmsId: String!
 }
 
@@ -255,6 +256,7 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  id: ID
   name: String!
   email: String!
   password: String!
@@ -386,6 +388,7 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: ID
+  email: String
 }
 `
       }

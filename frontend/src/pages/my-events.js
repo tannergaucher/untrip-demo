@@ -1,12 +1,11 @@
 import React from "react"
-
 import Layout from "../components/layout"
-import Auth from "../components/auth"
+import { Heading } from "grommet"
 
-export default function login() {
+export default () => {
   return (
     <Layout>
-      <Auth />
+      <Heading level={3}>Events</Heading>
     </Layout>
   )
 }
