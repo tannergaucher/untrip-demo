@@ -5,6 +5,7 @@ import { Heading } from "grommet"
 import Layout from "../components/layout"
 import PleaseLogin from "../containers/pleaseLogin"
 import Logout from "../containers/logout"
+import Auth from "../components/auth"
 import { CURRENT_USER_QUERY } from "../containers/user"
 
 export default () => {
@@ -22,6 +23,7 @@ function Profile() {
 
   if (loading) return <p>loading..</p>
   if (error) return <p>{error.message}</p>
+  if (!data.me) return <Auth />
 
   return (
     <>

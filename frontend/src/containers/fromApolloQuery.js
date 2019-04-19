@@ -1,3 +1,8 @@
+/* 
+Example of a component that queries graphCMS from apollo client at run time, rather than Prisma, 
+by adding a context object to the query
+*/
+
 import React from "react"
 import { useQuery } from "react-apollo-hooks"
 import gql from "graphql-tag"

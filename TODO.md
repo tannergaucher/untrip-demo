@@ -6,4 +6,6 @@
 - Wire up <AddPost/> container
 - Wire up <CreateList/> modal, <AddToList/> container
 
-- debug login
+<!-- - debug login -->
+
+- Reset store on logout
