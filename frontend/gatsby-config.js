@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby App: Turn Static Data Dynamic`,
+    title: `Fullstack Gatsby Demo`,
     description: ``,
     author: `tannermichaelgaucher@gmail.com`,
   },

@@ -1,11 +1,13 @@
 import React from "react"
 import { useQuery } from "react-apollo-hooks"
-import { Heading } from "grommet"
+import { Heading, Box } from "grommet"
 
 import Layout from "../components/layout"
 import PleaseLogin from "../containers/pleaseLogin"
 import Logout from "../containers/logout"
 import Auth from "../components/auth"
+import ThemeToggle from "../components/themeToggle"
+
 import { CURRENT_USER_QUERY } from "../containers/user"
 
 export default () => {
@@ -26,9 +28,12 @@ function Profile() {
   if (!data.me) return <Auth />
 
   return (
-    <>
-      <Heading level={3}>Hey, {data.me.name} 👋</Heading>
+    <Box pad="medium">
+      <Heading level={2}>Hey, {data.me.name} 👋</Heading>
+      <Heading level={2}>Lists</Heading>
+      <Heading level={2}>Events</Heading>
+      <ThemeToggle />
       <Logout />
-    </>
+    </Box>
   )
 }

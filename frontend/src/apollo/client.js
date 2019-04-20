@@ -16,8 +16,13 @@ export const client = new ApolloClient({
   cache,
 })
 
-cache.writeData({
-  data: {
-    test: true,
-  },
+const data = {
+  test: true,
+}
+
+cache.writeData({ data })
+
+// re-write data after resetting store too
+client.onResetStore(() => {
+  cache.writeData({ data })
 })

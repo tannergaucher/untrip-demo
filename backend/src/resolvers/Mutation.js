@@ -25,8 +25,6 @@ const Mutation = {
     }
   },
   login: async (parent, { email, password }, context) => {
-    console.log(email, password)
-
     const user = await context.prisma.user({ email })
 
     if (!user) {
@@ -55,6 +53,11 @@ const Mutation = {
     context.response.clearCookie('token')
 
     return { message: 'Goodbye' }
+  },
+  addPlace: (parent, { gcmsId }, context) => {
+    const userId = getUserId(context)
+
+    console.log(userId)
   },
 }
 

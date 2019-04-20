@@ -1,21 +1,7 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import styled from "styled-components"
-import { Heading } from "grommet"
-
-import Menu from "../components/menu"
-
-const Header = styled.header`
-  grid-area: header;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  h4 {
-    margin: 0;
-    text-align: center;
-  }
-`
+import { Heading, Box } from "grommet"
+import Link from "../components/styles/link"
 
 export default () => {
   const { site } = useStaticQuery(graphql`
@@ -29,9 +15,13 @@ export default () => {
   `)
 
   return (
-    <Header>
-      <Heading level={3}>{site.siteMetadata.title}</Heading>
+    <Box as="header" style={{ gridArea: "header" }} background="">
+      <Link to="/" style={{}}>
+        <Heading level={4} margin="medium" color="neutral-2">
+          {site.siteMetadata.title}
+        </Heading>
+      </Link>
       {/* <Menu /> */}
-    </Header>
+    </Box>
   )
 }

@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { Text } from "grommet"
 
 const DisplayError = ({ error }) => {
   if (!error || !error.message) return null
@@ -10,13 +11,17 @@ const DisplayError = ({ error }) => {
   ) {
     return error.networkError.result.errors.map((error, i) => (
       <div key={i}>
-        <p>{error.message.replace("GraphQL error: ", "")}</p>
+        <Text color="status-error">
+          {error.message.replace("GraphQL error: ", "")}
+        </Text>
       </div>
     ))
   }
   return (
     <>
-      <p>{error.message.replace("GraphQL error: ", "")}</p>
+      <Text color="status-error">
+        {error.message.replace("GraphQL error: ", "")}
+      </Text>
     </>
   )
 }

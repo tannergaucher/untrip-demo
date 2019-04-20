@@ -1,13 +1,19 @@
 import React from "react"
-import GraphImg from "graphcms-image"
+import { Box, Heading } from "grommet"
+import Link from "gatsby-link"
+// import GraphImg from "graphcms-image"
+import { kebabCase } from "lodash"
 
-const post = ({ description, title, id, image }) => (
-  <div>
-    <h6>{description}</h6>
-    <h1>{title}</h1>
-    <h6>ID: {id}</h6>
-    <GraphImg image={image} maxWidth={300} />
-  </div>
+const post = ({ title, id, image }) => (
+  <Link
+    to={`/posts/${kebabCase(title)}`}
+    style={{ textDecoration: "none", color: "inherit" }}
+  >
+    <Box pad="medium" margin="medium" elevation="medium" round="xsmall">
+      <Heading level={2}>{title}</Heading>
+      {/* <GraphImg image={image} maxWidth={300} /> */}
+    </Box>
+  </Link>
 )
 
 export default post
