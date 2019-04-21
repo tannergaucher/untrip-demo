@@ -35,7 +35,7 @@ export default function Login() {
         {(login, { loading, error }) => (
           <Form
             onSubmit={async e => {
-              const res = await login()
+              await login()
               client.resetStore()
               navigate(`/`)
             }}
