@@ -4,9 +4,21 @@ type User {
   email: String! @unique
   password: String!
   places: [Place!]
+  events: [Event!]
 }
 
 type Place {
   id: ID! @id
   gcmsId: String! @unique
+}
+
+type Event {
+  id: ID! @id
+  gcmsId: String! @unique
+}
+
+type List {
+  id: ID! @id
+  name: String!
+  places: [Place!]!
 }

@@ -14,12 +14,24 @@ type User {
   name: String!
   password: String!
   email: String!
-  places: [Place!]!
+  events: [Event!]!
+  lists: [List!]!
 }
 
 type Place {
   id: ID!
   gcmsId: String!
+}
+
+type Event {
+  id: ID!
+  gsmcId: String!
+}
+
+type List {
+  id: ID!
+  name: String!
+  places: [Place!]!
 }
 
 type Query {
@@ -30,5 +42,5 @@ type Mutation {
   signup(email: String!, password: String!, name: String!): AuthPayload!
   login(email: String!, password: String): AuthPayload!
   logout: SuccessMessage
-  addPlace(gcmsId: String!): Place
+  toggleEvent(gcmsId: String!): Event
 }

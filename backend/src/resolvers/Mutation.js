@@ -54,10 +54,15 @@ const Mutation = {
 
     return { message: 'Goodbye' }
   },
-  addPlace: (parent, { gcmsId }, context) => {
+  toggleEvent: (parent, { gcmsId }, context) => {
     const userId = getUserId(context)
-
     console.log(userId)
+
+    //check if user has event in [events]
+
+    // if !event, add event
+
+    // if event, remove event
   },
 }
 
