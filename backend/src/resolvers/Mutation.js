@@ -56,13 +56,42 @@ const Mutation = {
   },
   toggleEvent: (parent, { gcmsId }, context) => {
     const userId = getUserId(context)
-    console.log(userId)
+    console.log(userId, gcmsId)
 
     //check if user has event in [events]
-
     // if !event, add event
-
     // if event, remove event
+  },
+  createList: async (parent, { title, gcmsId }, context) => {
+    // create a list with title of title
+    // place of placeId
+    // connect to user
+
+    const userId = getUserId(context)
+    console.log(userId, title, placeId)
+
+    if (!userId) {
+      throw new AuthError()
+    }
+
+    const list = await context.prisma.createList({
+      title: title,
+      places: {
+        create: {
+          gcmsId: gcmsId,
+        },
+      },
+      user: {
+        connect: {
+          id: userId,
+        },
+      },
+    })
+    console.log(list)
+    return list
+  },
+  deleteList: (parent, { id }, context) => {
+    return context.prisma.deleteList({ id })
   },
 }
 

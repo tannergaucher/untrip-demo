@@ -43,4 +43,6 @@ type Mutation {
   login(email: String!, password: String): AuthPayload!
   logout: SuccessMessage
   toggleEvent(gcmsId: String!): Event
+  createList(title: String!, gcmsId: String!): List
+  deleteList(id: ID!): List
 }

@@ -198,7 +198,7 @@ input EventWhereUniqueInput {
 
 type List {
   id: ID!
-  name: String!
+  title: String!
   places(where: PlaceWhereInput, orderBy: PlaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Place!]
 }
 
@@ -210,7 +210,7 @@ type ListConnection {
 
 input ListCreateInput {
   id: ID
-  name: String!
+  title: String!
   places: PlaceCreateManyInput
 }
 
@@ -222,13 +222,13 @@ type ListEdge {
 enum ListOrderByInput {
   id_ASC
   id_DESC
-  name_ASC
-  name_DESC
+  title_ASC
+  title_DESC
 }
 
 type ListPreviousValues {
   id: ID!
-  name: String!
+  title: String!
 }
 
 type ListSubscriptionPayload {
@@ -250,12 +250,12 @@ input ListSubscriptionWhereInput {
 }
 
 input ListUpdateInput {
-  name: String
+  title: String
   places: PlaceUpdateManyInput
 }
 
 input ListUpdateManyMutationInput {
-  name: String
+  title: String
 }
 
 input ListWhereInput {
@@ -273,20 +273,20 @@ input ListWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
   places_every: PlaceWhereInput
   places_some: PlaceWhereInput
   places_none: PlaceWhereInput

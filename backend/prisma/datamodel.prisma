@@ -19,6 +19,6 @@ type Event {
 
 type List {
   id: ID! @id
-  name: String!
+  title: String!
   places: [Place!]!
 }

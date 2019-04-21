@@ -228,7 +228,11 @@ export type PlaceOrderByInput =
   | "gcmsId_ASC"
   | "gcmsId_DESC";
 
-export type ListOrderByInput = "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC";
+export type ListOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "title_ASC"
+  | "title_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -334,20 +338,20 @@ export interface ListWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
-  name?: String;
-  name_not?: String;
-  name_in?: String[] | String;
-  name_not_in?: String[] | String;
-  name_lt?: String;
-  name_lte?: String;
-  name_gt?: String;
-  name_gte?: String;
-  name_contains?: String;
-  name_not_contains?: String;
-  name_starts_with?: String;
-  name_not_starts_with?: String;
-  name_ends_with?: String;
-  name_not_ends_with?: String;
+  title?: String;
+  title_not?: String;
+  title_in?: String[] | String;
+  title_not_in?: String[] | String;
+  title_lt?: String;
+  title_lte?: String;
+  title_gt?: String;
+  title_gte?: String;
+  title_contains?: String;
+  title_not_contains?: String;
+  title_starts_with?: String;
+  title_not_starts_with?: String;
+  title_ends_with?: String;
+  title_not_ends_with?: String;
   places_every?: PlaceWhereInput;
   places_some?: PlaceWhereInput;
   places_none?: PlaceWhereInput;
@@ -449,7 +453,7 @@ export interface EventUpdateManyMutationInput {
 
 export interface ListCreateInput {
   id?: ID_Input;
-  name: String;
+  title: String;
   places?: PlaceCreateManyInput;
 }
 
@@ -464,7 +468,7 @@ export interface PlaceCreateInput {
 }
 
 export interface ListUpdateInput {
-  name?: String;
+  title?: String;
   places?: PlaceUpdateManyInput;
 }
 
@@ -545,7 +549,7 @@ export interface PlaceUpdateManyDataInput {
 }
 
 export interface ListUpdateManyMutationInput {
-  name?: String;
+  title?: String;
 }
 
 export interface PlaceUpdateInput {
@@ -804,12 +808,12 @@ export interface AggregateEventSubscription
 
 export interface List {
   id: ID_Output;
-  name: String;
+  title: String;
 }
 
 export interface ListPromise extends Promise<List>, Fragmentable {
   id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
+  title: () => Promise<String>;
   places: <T = FragmentableArray<Place>>(args?: {
     where?: PlaceWhereInput;
     orderBy?: PlaceOrderByInput;
@@ -825,7 +829,7 @@ export interface ListSubscription
   extends Promise<AsyncIterator<List>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
+  title: () => Promise<AsyncIterator<String>>;
   places: <T = Promise<AsyncIterator<PlaceSubscription>>>(args?: {
     where?: PlaceWhereInput;
     orderBy?: PlaceOrderByInput;
@@ -1162,21 +1166,21 @@ export interface ListSubscriptionPayloadSubscription
 
 export interface ListPreviousValues {
   id: ID_Output;
-  name: String;
+  title: String;
 }
 
 export interface ListPreviousValuesPromise
   extends Promise<ListPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
+  title: () => Promise<String>;
 }
 
 export interface ListPreviousValuesSubscription
   extends Promise<AsyncIterator<ListPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
+  title: () => Promise<AsyncIterator<String>>;
 }
 
 export interface PlaceSubscriptionPayload {
