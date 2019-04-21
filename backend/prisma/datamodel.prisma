@@ -3,7 +3,7 @@ type User {
   name: String!
   email: String! @unique
   password: String!
-  places: [Place!]
+  lists: [List!]
   events: [Event!]
 }
 
@@ -15,10 +15,12 @@ type Place {
 type Event {
   id: ID! @id
   gcmsId: String! @unique
+  user: User!
 }
 
 type List {
   id: ID! @id
   title: String!
   places: [Place!]!
+  user: User!
 }

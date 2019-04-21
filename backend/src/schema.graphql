@@ -30,8 +30,9 @@ type Event {
 
 type List {
   id: ID!
-  name: String!
+  title: String!
   places: [Place!]!
+  user: User
 }
 
 type Query {

@@ -216,11 +216,11 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type EventOrderByInput =
+export type ListOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "gcmsId_ASC"
-  | "gcmsId_DESC";
+  | "title_ASC"
+  | "title_DESC";
 
 export type PlaceOrderByInput =
   | "id_ASC"
@@ -228,11 +228,11 @@ export type PlaceOrderByInput =
   | "gcmsId_ASC"
   | "gcmsId_DESC";
 
-export type ListOrderByInput =
+export type EventOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "title_ASC"
-  | "title_DESC";
+  | "gcmsId_ASC"
+  | "gcmsId_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -251,7 +251,7 @@ export type EventWhereUniqueInput = AtLeastOne<{
   gcmsId?: String;
 }>;
 
-export interface EventWhereInput {
+export interface ListWhereInput {
   id?: ID_Input;
   id_not?: ID_Input;
   id_in?: ID_Input[] | ID_Input;
@@ -266,28 +266,28 @@ export interface EventWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
-  gcmsId?: String;
-  gcmsId_not?: String;
-  gcmsId_in?: String[] | String;
-  gcmsId_not_in?: String[] | String;
-  gcmsId_lt?: String;
-  gcmsId_lte?: String;
-  gcmsId_gt?: String;
-  gcmsId_gte?: String;
-  gcmsId_contains?: String;
-  gcmsId_not_contains?: String;
-  gcmsId_starts_with?: String;
-  gcmsId_not_starts_with?: String;
-  gcmsId_ends_with?: String;
-  gcmsId_not_ends_with?: String;
-  AND?: EventWhereInput[] | EventWhereInput;
-  OR?: EventWhereInput[] | EventWhereInput;
-  NOT?: EventWhereInput[] | EventWhereInput;
+  title?: String;
+  title_not?: String;
+  title_in?: String[] | String;
+  title_not_in?: String[] | String;
+  title_lt?: String;
+  title_lte?: String;
+  title_gt?: String;
+  title_gte?: String;
+  title_contains?: String;
+  title_not_contains?: String;
+  title_starts_with?: String;
+  title_not_starts_with?: String;
+  title_ends_with?: String;
+  title_not_ends_with?: String;
+  places_every?: PlaceWhereInput;
+  places_some?: PlaceWhereInput;
+  places_none?: PlaceWhereInput;
+  user?: UserWhereInput;
+  AND?: ListWhereInput[] | ListWhereInput;
+  OR?: ListWhereInput[] | ListWhereInput;
+  NOT?: ListWhereInput[] | ListWhereInput;
 }
-
-export type ListWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
 
 export interface PlaceWhereInput {
   id?: ID_Input;
@@ -322,53 +322,6 @@ export interface PlaceWhereInput {
   OR?: PlaceWhereInput[] | PlaceWhereInput;
   NOT?: PlaceWhereInput[] | PlaceWhereInput;
 }
-
-export interface ListWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  title?: String;
-  title_not?: String;
-  title_in?: String[] | String;
-  title_not_in?: String[] | String;
-  title_lt?: String;
-  title_lte?: String;
-  title_gt?: String;
-  title_gte?: String;
-  title_contains?: String;
-  title_not_contains?: String;
-  title_starts_with?: String;
-  title_not_starts_with?: String;
-  title_ends_with?: String;
-  title_not_ends_with?: String;
-  places_every?: PlaceWhereInput;
-  places_some?: PlaceWhereInput;
-  places_none?: PlaceWhereInput;
-  AND?: ListWhereInput[] | ListWhereInput;
-  OR?: ListWhereInput[] | ListWhereInput;
-  NOT?: ListWhereInput[] | ListWhereInput;
-}
-
-export type PlaceWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-  gcmsId?: String;
-}>;
-
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-  email?: String;
-}>;
 
 export interface UserWhereInput {
   id?: ID_Input;
@@ -427,9 +380,9 @@ export interface UserWhereInput {
   password_not_starts_with?: String;
   password_ends_with?: String;
   password_not_ends_with?: String;
-  places_every?: PlaceWhereInput;
-  places_some?: PlaceWhereInput;
-  places_none?: PlaceWhereInput;
+  lists_every?: ListWhereInput;
+  lists_some?: ListWhereInput;
+  lists_none?: ListWhereInput;
   events_every?: EventWhereInput;
   events_some?: EventWhereInput;
   events_none?: EventWhereInput;
@@ -438,20 +391,80 @@ export interface UserWhereInput {
   NOT?: UserWhereInput[] | UserWhereInput;
 }
 
+export interface EventWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  gcmsId?: String;
+  gcmsId_not?: String;
+  gcmsId_in?: String[] | String;
+  gcmsId_not_in?: String[] | String;
+  gcmsId_lt?: String;
+  gcmsId_lte?: String;
+  gcmsId_gt?: String;
+  gcmsId_gte?: String;
+  gcmsId_contains?: String;
+  gcmsId_not_contains?: String;
+  gcmsId_starts_with?: String;
+  gcmsId_not_starts_with?: String;
+  gcmsId_ends_with?: String;
+  gcmsId_not_ends_with?: String;
+  user?: UserWhereInput;
+  AND?: EventWhereInput[] | EventWhereInput;
+  OR?: EventWhereInput[] | EventWhereInput;
+  NOT?: EventWhereInput[] | EventWhereInput;
+}
+
+export type ListWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export type PlaceWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+  gcmsId?: String;
+}>;
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+  email?: String;
+}>;
+
 export interface EventCreateInput {
   id?: ID_Input;
   gcmsId: String;
+  user: UserCreateOneWithoutEventsInput;
 }
 
-export interface EventUpdateInput {
-  gcmsId?: String;
+export interface UserCreateOneWithoutEventsInput {
+  create?: UserCreateWithoutEventsInput;
+  connect?: UserWhereUniqueInput;
 }
 
-export interface EventUpdateManyMutationInput {
-  gcmsId?: String;
+export interface UserCreateWithoutEventsInput {
+  id?: ID_Input;
+  name: String;
+  email: String;
+  password: String;
+  lists?: ListCreateManyWithoutUserInput;
 }
 
-export interface ListCreateInput {
+export interface ListCreateManyWithoutUserInput {
+  create?: ListCreateWithoutUserInput[] | ListCreateWithoutUserInput;
+  connect?: ListWhereUniqueInput[] | ListWhereUniqueInput;
+}
+
+export interface ListCreateWithoutUserInput {
   id?: ID_Input;
   title: String;
   places?: PlaceCreateManyInput;
@@ -467,7 +480,49 @@ export interface PlaceCreateInput {
   gcmsId: String;
 }
 
-export interface ListUpdateInput {
+export interface EventUpdateInput {
+  gcmsId?: String;
+  user?: UserUpdateOneRequiredWithoutEventsInput;
+}
+
+export interface UserUpdateOneRequiredWithoutEventsInput {
+  create?: UserCreateWithoutEventsInput;
+  update?: UserUpdateWithoutEventsDataInput;
+  upsert?: UserUpsertWithoutEventsInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface UserUpdateWithoutEventsDataInput {
+  name?: String;
+  email?: String;
+  password?: String;
+  lists?: ListUpdateManyWithoutUserInput;
+}
+
+export interface ListUpdateManyWithoutUserInput {
+  create?: ListCreateWithoutUserInput[] | ListCreateWithoutUserInput;
+  delete?: ListWhereUniqueInput[] | ListWhereUniqueInput;
+  connect?: ListWhereUniqueInput[] | ListWhereUniqueInput;
+  set?: ListWhereUniqueInput[] | ListWhereUniqueInput;
+  disconnect?: ListWhereUniqueInput[] | ListWhereUniqueInput;
+  update?:
+    | ListUpdateWithWhereUniqueWithoutUserInput[]
+    | ListUpdateWithWhereUniqueWithoutUserInput;
+  upsert?:
+    | ListUpsertWithWhereUniqueWithoutUserInput[]
+    | ListUpsertWithWhereUniqueWithoutUserInput;
+  deleteMany?: ListScalarWhereInput[] | ListScalarWhereInput;
+  updateMany?:
+    | ListUpdateManyWithWhereNestedInput[]
+    | ListUpdateManyWithWhereNestedInput;
+}
+
+export interface ListUpdateWithWhereUniqueWithoutUserInput {
+  where: ListWhereUniqueInput;
+  data: ListUpdateWithoutUserDataInput;
+}
+
+export interface ListUpdateWithoutUserDataInput {
   title?: String;
   places?: PlaceUpdateManyInput;
 }
@@ -548,71 +603,145 @@ export interface PlaceUpdateManyDataInput {
   gcmsId?: String;
 }
 
-export interface ListUpdateManyMutationInput {
+export interface ListUpsertWithWhereUniqueWithoutUserInput {
+  where: ListWhereUniqueInput;
+  update: ListUpdateWithoutUserDataInput;
+  create: ListCreateWithoutUserInput;
+}
+
+export interface ListScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  title?: String;
+  title_not?: String;
+  title_in?: String[] | String;
+  title_not_in?: String[] | String;
+  title_lt?: String;
+  title_lte?: String;
+  title_gt?: String;
+  title_gte?: String;
+  title_contains?: String;
+  title_not_contains?: String;
+  title_starts_with?: String;
+  title_not_starts_with?: String;
+  title_ends_with?: String;
+  title_not_ends_with?: String;
+  AND?: ListScalarWhereInput[] | ListScalarWhereInput;
+  OR?: ListScalarWhereInput[] | ListScalarWhereInput;
+  NOT?: ListScalarWhereInput[] | ListScalarWhereInput;
+}
+
+export interface ListUpdateManyWithWhereNestedInput {
+  where: ListScalarWhereInput;
+  data: ListUpdateManyDataInput;
+}
+
+export interface ListUpdateManyDataInput {
   title?: String;
 }
 
-export interface PlaceUpdateInput {
+export interface UserUpsertWithoutEventsInput {
+  update: UserUpdateWithoutEventsDataInput;
+  create: UserCreateWithoutEventsInput;
+}
+
+export interface EventUpdateManyMutationInput {
   gcmsId?: String;
 }
 
-export interface PlaceUpdateManyMutationInput {
-  gcmsId?: String;
+export interface ListCreateInput {
+  id?: ID_Input;
+  title: String;
+  places?: PlaceCreateManyInput;
+  user: UserCreateOneWithoutListsInput;
 }
 
-export interface UserCreateInput {
+export interface UserCreateOneWithoutListsInput {
+  create?: UserCreateWithoutListsInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface UserCreateWithoutListsInput {
   id?: ID_Input;
   name: String;
   email: String;
   password: String;
-  places?: PlaceCreateManyInput;
-  events?: EventCreateManyInput;
+  events?: EventCreateManyWithoutUserInput;
 }
 
-export interface EventCreateManyInput {
-  create?: EventCreateInput[] | EventCreateInput;
+export interface EventCreateManyWithoutUserInput {
+  create?: EventCreateWithoutUserInput[] | EventCreateWithoutUserInput;
   connect?: EventWhereUniqueInput[] | EventWhereUniqueInput;
 }
 
-export interface UserUpdateInput {
+export interface EventCreateWithoutUserInput {
+  id?: ID_Input;
+  gcmsId: String;
+}
+
+export interface ListUpdateInput {
+  title?: String;
+  places?: PlaceUpdateManyInput;
+  user?: UserUpdateOneRequiredWithoutListsInput;
+}
+
+export interface UserUpdateOneRequiredWithoutListsInput {
+  create?: UserCreateWithoutListsInput;
+  update?: UserUpdateWithoutListsDataInput;
+  upsert?: UserUpsertWithoutListsInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface UserUpdateWithoutListsDataInput {
   name?: String;
   email?: String;
   password?: String;
-  places?: PlaceUpdateManyInput;
-  events?: EventUpdateManyInput;
+  events?: EventUpdateManyWithoutUserInput;
 }
 
-export interface EventUpdateManyInput {
-  create?: EventCreateInput[] | EventCreateInput;
-  update?:
-    | EventUpdateWithWhereUniqueNestedInput[]
-    | EventUpdateWithWhereUniqueNestedInput;
-  upsert?:
-    | EventUpsertWithWhereUniqueNestedInput[]
-    | EventUpsertWithWhereUniqueNestedInput;
+export interface EventUpdateManyWithoutUserInput {
+  create?: EventCreateWithoutUserInput[] | EventCreateWithoutUserInput;
   delete?: EventWhereUniqueInput[] | EventWhereUniqueInput;
   connect?: EventWhereUniqueInput[] | EventWhereUniqueInput;
   set?: EventWhereUniqueInput[] | EventWhereUniqueInput;
   disconnect?: EventWhereUniqueInput[] | EventWhereUniqueInput;
+  update?:
+    | EventUpdateWithWhereUniqueWithoutUserInput[]
+    | EventUpdateWithWhereUniqueWithoutUserInput;
+  upsert?:
+    | EventUpsertWithWhereUniqueWithoutUserInput[]
+    | EventUpsertWithWhereUniqueWithoutUserInput;
   deleteMany?: EventScalarWhereInput[] | EventScalarWhereInput;
   updateMany?:
     | EventUpdateManyWithWhereNestedInput[]
     | EventUpdateManyWithWhereNestedInput;
 }
 
-export interface EventUpdateWithWhereUniqueNestedInput {
+export interface EventUpdateWithWhereUniqueWithoutUserInput {
   where: EventWhereUniqueInput;
-  data: EventUpdateDataInput;
+  data: EventUpdateWithoutUserDataInput;
 }
 
-export interface EventUpdateDataInput {
+export interface EventUpdateWithoutUserDataInput {
   gcmsId?: String;
 }
 
-export interface EventUpsertWithWhereUniqueNestedInput {
+export interface EventUpsertWithWhereUniqueWithoutUserInput {
   where: EventWhereUniqueInput;
-  update: EventUpdateDataInput;
-  create: EventCreateInput;
+  update: EventUpdateWithoutUserDataInput;
+  create: EventCreateWithoutUserInput;
 }
 
 export interface EventScalarWhereInput {
@@ -656,6 +785,40 @@ export interface EventUpdateManyWithWhereNestedInput {
 
 export interface EventUpdateManyDataInput {
   gcmsId?: String;
+}
+
+export interface UserUpsertWithoutListsInput {
+  update: UserUpdateWithoutListsDataInput;
+  create: UserCreateWithoutListsInput;
+}
+
+export interface ListUpdateManyMutationInput {
+  title?: String;
+}
+
+export interface PlaceUpdateInput {
+  gcmsId?: String;
+}
+
+export interface PlaceUpdateManyMutationInput {
+  gcmsId?: String;
+}
+
+export interface UserCreateInput {
+  id?: ID_Input;
+  name: String;
+  email: String;
+  password: String;
+  lists?: ListCreateManyWithoutUserInput;
+  events?: EventCreateManyWithoutUserInput;
+}
+
+export interface UserUpdateInput {
+  name?: String;
+  email?: String;
+  password?: String;
+  lists?: ListUpdateManyWithoutUserInput;
+  events?: EventUpdateManyWithoutUserInput;
 }
 
 export interface UserUpdateManyMutationInput {
@@ -720,10 +883,125 @@ export interface Event {
 export interface EventPromise extends Promise<Event>, Fragmentable {
   id: () => Promise<ID_Output>;
   gcmsId: () => Promise<String>;
+  user: <T = UserPromise>() => T;
 }
 
 export interface EventSubscription
   extends Promise<AsyncIterator<Event>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  gcmsId: () => Promise<AsyncIterator<String>>;
+  user: <T = UserSubscription>() => T;
+}
+
+export interface User {
+  id: ID_Output;
+  name: String;
+  email: String;
+  password: String;
+}
+
+export interface UserPromise extends Promise<User>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  password: () => Promise<String>;
+  lists: <T = FragmentableArray<List>>(args?: {
+    where?: ListWhereInput;
+    orderBy?: ListOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  events: <T = FragmentableArray<Event>>(args?: {
+    where?: EventWhereInput;
+    orderBy?: EventOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface UserSubscription
+  extends Promise<AsyncIterator<User>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
+  lists: <T = Promise<AsyncIterator<ListSubscription>>>(args?: {
+    where?: ListWhereInput;
+    orderBy?: ListOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  events: <T = Promise<AsyncIterator<EventSubscription>>>(args?: {
+    where?: EventWhereInput;
+    orderBy?: EventOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface List {
+  id: ID_Output;
+  title: String;
+}
+
+export interface ListPromise extends Promise<List>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+  places: <T = FragmentableArray<Place>>(args?: {
+    where?: PlaceWhereInput;
+    orderBy?: PlaceOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  user: <T = UserPromise>() => T;
+}
+
+export interface ListSubscription
+  extends Promise<AsyncIterator<List>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+  places: <T = Promise<AsyncIterator<PlaceSubscription>>>(args?: {
+    where?: PlaceWhereInput;
+    orderBy?: PlaceOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  user: <T = UserSubscription>() => T;
+}
+
+export interface Place {
+  id: ID_Output;
+  gcmsId: String;
+}
+
+export interface PlacePromise extends Promise<Place>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  gcmsId: () => Promise<String>;
+}
+
+export interface PlaceSubscription
+  extends Promise<AsyncIterator<Place>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   gcmsId: () => Promise<AsyncIterator<String>>;
@@ -804,58 +1082,6 @@ export interface AggregateEventSubscription
   extends Promise<AsyncIterator<AggregateEvent>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface List {
-  id: ID_Output;
-  title: String;
-}
-
-export interface ListPromise extends Promise<List>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  title: () => Promise<String>;
-  places: <T = FragmentableArray<Place>>(args?: {
-    where?: PlaceWhereInput;
-    orderBy?: PlaceOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface ListSubscription
-  extends Promise<AsyncIterator<List>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  title: () => Promise<AsyncIterator<String>>;
-  places: <T = Promise<AsyncIterator<PlaceSubscription>>>(args?: {
-    where?: PlaceWhereInput;
-    orderBy?: PlaceOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface Place {
-  id: ID_Output;
-  gcmsId: String;
-}
-
-export interface PlacePromise extends Promise<Place>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  gcmsId: () => Promise<String>;
-}
-
-export interface PlaceSubscription
-  extends Promise<AsyncIterator<Place>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  gcmsId: () => Promise<AsyncIterator<String>>;
 }
 
 export interface ListConnection {
@@ -964,65 +1190,6 @@ export interface AggregatePlaceSubscription
   extends Promise<AsyncIterator<AggregatePlace>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface User {
-  id: ID_Output;
-  name: String;
-  email: String;
-  password: String;
-}
-
-export interface UserPromise extends Promise<User>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
-  password: () => Promise<String>;
-  places: <T = FragmentableArray<Place>>(args?: {
-    where?: PlaceWhereInput;
-    orderBy?: PlaceOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  events: <T = FragmentableArray<Event>>(args?: {
-    where?: EventWhereInput;
-    orderBy?: EventOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface UserSubscription
-  extends Promise<AsyncIterator<User>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  email: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
-  places: <T = Promise<AsyncIterator<PlaceSubscription>>>(args?: {
-    where?: PlaceWhereInput;
-    orderBy?: PlaceOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  events: <T = Promise<AsyncIterator<EventSubscription>>>(args?: {
-    where?: EventWhereInput;
-    orderBy?: EventOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
 }
 
 export interface UserConnection {

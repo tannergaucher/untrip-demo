@@ -11,14 +11,11 @@ const Mutation = {
       email,
       password: hashedPassword,
     })
-
     const token = sign({ userId: user.id }, process.env.APP_SECRET)
-
     context.response.cookie('token', token, {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365,
     })
-
     return {
       token,
       user,
@@ -26,24 +23,19 @@ const Mutation = {
   },
   login: async (parent, { email, password }, context) => {
     const user = await context.prisma.user({ email })
-
     if (!user) {
       throw new Error(`No user found for this email`)
     }
-
     const passwordValid = await compare(password, user.password)
 
     if (!passwordValid) {
       throw new Error(`Invalid Password`)
     }
-
     const token = sign({ userId: user.id }, process.env.APP_SECRET)
-
     context.response.cookie('token', token, {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365,
     })
-
     return {
       token,
       user,
@@ -51,29 +43,39 @@ const Mutation = {
   },
   logout: (parent, { id }, context) => {
     context.response.clearCookie('token')
-
     return { message: 'Goodbye' }
   },
-  toggleEvent: (parent, { gcmsId }, context) => {
+  toggleEvent: async (parent, { gcmsId }, context) => {
     const userId = getUserId(context)
-    console.log(userId, gcmsId)
 
-    //check if user has event in [events]
-    // if !event, add event
-    // if event, remove event
+    const [existingEvent] = await context.prisma.user({ id: userId }).events({
+      where: {
+        gcmsId: gcmsId,
+      },
+    })
+
+    if (!existingEvent) {
+      const event = await context.prisma.createEvent({
+        gcmsId: gcmsId,
+        user: {
+          connect: {
+            id: userId,
+          },
+        },
+      })
+      return event
+    } else {
+      const event = await context.prisma.deleteEvent({
+        id: existingEvent.id,
+      })
+      return event
+    }
   },
   createList: async (parent, { title, gcmsId }, context) => {
-    // create a list with title of title
-    // place of placeId
-    // connect to user
-
     const userId = getUserId(context)
-    console.log(userId, title, placeId)
-
     if (!userId) {
       throw new AuthError()
     }
-
     const list = await context.prisma.createList({
       title: title,
       places: {
@@ -87,7 +89,6 @@ const Mutation = {
         },
       },
     })
-    console.log(list)
     return list
   },
   deleteList: (parent, { id }, context) => {

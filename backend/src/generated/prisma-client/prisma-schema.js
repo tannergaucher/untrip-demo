@@ -26,6 +26,7 @@ type BatchPayload {
 type Event {
   id: ID!
   gcmsId: String!
+  user: User!
 }
 
 type EventConnection {
@@ -37,11 +38,17 @@ type EventConnection {
 input EventCreateInput {
   id: ID
   gcmsId: String!
+  user: UserCreateOneWithoutEventsInput!
 }
 
-input EventCreateManyInput {
-  create: [EventCreateInput!]
+input EventCreateManyWithoutUserInput {
+  create: [EventCreateWithoutUserInput!]
   connect: [EventWhereUniqueInput!]
+}
+
+input EventCreateWithoutUserInput {
+  id: ID
+  gcmsId: String!
 }
 
 type EventEdge {
@@ -113,32 +120,29 @@ input EventSubscriptionWhereInput {
   NOT: [EventSubscriptionWhereInput!]
 }
 
-input EventUpdateDataInput {
-  gcmsId: String
-}
-
 input EventUpdateInput {
   gcmsId: String
+  user: UserUpdateOneRequiredWithoutEventsInput
 }
 
 input EventUpdateManyDataInput {
   gcmsId: String
 }
 
-input EventUpdateManyInput {
-  create: [EventCreateInput!]
-  update: [EventUpdateWithWhereUniqueNestedInput!]
-  upsert: [EventUpsertWithWhereUniqueNestedInput!]
+input EventUpdateManyMutationInput {
+  gcmsId: String
+}
+
+input EventUpdateManyWithoutUserInput {
+  create: [EventCreateWithoutUserInput!]
   delete: [EventWhereUniqueInput!]
   connect: [EventWhereUniqueInput!]
   set: [EventWhereUniqueInput!]
   disconnect: [EventWhereUniqueInput!]
+  update: [EventUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [EventUpsertWithWhereUniqueWithoutUserInput!]
   deleteMany: [EventScalarWhereInput!]
   updateMany: [EventUpdateManyWithWhereNestedInput!]
-}
-
-input EventUpdateManyMutationInput {
-  gcmsId: String
 }
 
 input EventUpdateManyWithWhereNestedInput {
@@ -146,15 +150,19 @@ input EventUpdateManyWithWhereNestedInput {
   data: EventUpdateManyDataInput!
 }
 
-input EventUpdateWithWhereUniqueNestedInput {
-  where: EventWhereUniqueInput!
-  data: EventUpdateDataInput!
+input EventUpdateWithoutUserDataInput {
+  gcmsId: String
 }
 
-input EventUpsertWithWhereUniqueNestedInput {
+input EventUpdateWithWhereUniqueWithoutUserInput {
   where: EventWhereUniqueInput!
-  update: EventUpdateDataInput!
-  create: EventCreateInput!
+  data: EventUpdateWithoutUserDataInput!
+}
+
+input EventUpsertWithWhereUniqueWithoutUserInput {
+  where: EventWhereUniqueInput!
+  update: EventUpdateWithoutUserDataInput!
+  create: EventCreateWithoutUserInput!
 }
 
 input EventWhereInput {
@@ -186,6 +194,7 @@ input EventWhereInput {
   gcmsId_not_starts_with: String
   gcmsId_ends_with: String
   gcmsId_not_ends_with: String
+  user: UserWhereInput
   AND: [EventWhereInput!]
   OR: [EventWhereInput!]
   NOT: [EventWhereInput!]
@@ -200,6 +209,7 @@ type List {
   id: ID!
   title: String!
   places(where: PlaceWhereInput, orderBy: PlaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Place!]
+  user: User!
 }
 
 type ListConnection {
@@ -209,6 +219,18 @@ type ListConnection {
 }
 
 input ListCreateInput {
+  id: ID
+  title: String!
+  places: PlaceCreateManyInput
+  user: UserCreateOneWithoutListsInput!
+}
+
+input ListCreateManyWithoutUserInput {
+  create: [ListCreateWithoutUserInput!]
+  connect: [ListWhereUniqueInput!]
+}
+
+input ListCreateWithoutUserInput {
   id: ID
   title: String!
   places: PlaceCreateManyInput
@@ -229,6 +251,40 @@ enum ListOrderByInput {
 type ListPreviousValues {
   id: ID!
   title: String!
+}
+
+input ListScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  AND: [ListScalarWhereInput!]
+  OR: [ListScalarWhereInput!]
+  NOT: [ListScalarWhereInput!]
 }
 
 type ListSubscriptionPayload {
@@ -252,10 +308,48 @@ input ListSubscriptionWhereInput {
 input ListUpdateInput {
   title: String
   places: PlaceUpdateManyInput
+  user: UserUpdateOneRequiredWithoutListsInput
+}
+
+input ListUpdateManyDataInput {
+  title: String
 }
 
 input ListUpdateManyMutationInput {
   title: String
+}
+
+input ListUpdateManyWithoutUserInput {
+  create: [ListCreateWithoutUserInput!]
+  delete: [ListWhereUniqueInput!]
+  connect: [ListWhereUniqueInput!]
+  set: [ListWhereUniqueInput!]
+  disconnect: [ListWhereUniqueInput!]
+  update: [ListUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [ListUpsertWithWhereUniqueWithoutUserInput!]
+  deleteMany: [ListScalarWhereInput!]
+  updateMany: [ListUpdateManyWithWhereNestedInput!]
+}
+
+input ListUpdateManyWithWhereNestedInput {
+  where: ListScalarWhereInput!
+  data: ListUpdateManyDataInput!
+}
+
+input ListUpdateWithoutUserDataInput {
+  title: String
+  places: PlaceUpdateManyInput
+}
+
+input ListUpdateWithWhereUniqueWithoutUserInput {
+  where: ListWhereUniqueInput!
+  data: ListUpdateWithoutUserDataInput!
+}
+
+input ListUpsertWithWhereUniqueWithoutUserInput {
+  where: ListWhereUniqueInput!
+  update: ListUpdateWithoutUserDataInput!
+  create: ListCreateWithoutUserInput!
 }
 
 input ListWhereInput {
@@ -290,6 +384,7 @@ input ListWhereInput {
   places_every: PlaceWhereInput
   places_some: PlaceWhereInput
   places_none: PlaceWhereInput
+  user: UserWhereInput
   AND: [ListWhereInput!]
   OR: [ListWhereInput!]
   NOT: [ListWhereInput!]
@@ -546,7 +641,7 @@ type User {
   name: String!
   email: String!
   password: String!
-  places(where: PlaceWhereInput, orderBy: PlaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Place!]
+  lists(where: ListWhereInput, orderBy: ListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [List!]
   events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event!]
 }
 
@@ -561,8 +656,34 @@ input UserCreateInput {
   name: String!
   email: String!
   password: String!
-  places: PlaceCreateManyInput
-  events: EventCreateManyInput
+  lists: ListCreateManyWithoutUserInput
+  events: EventCreateManyWithoutUserInput
+}
+
+input UserCreateOneWithoutEventsInput {
+  create: UserCreateWithoutEventsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutListsInput {
+  create: UserCreateWithoutListsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutEventsInput {
+  id: ID
+  name: String!
+  email: String!
+  password: String!
+  lists: ListCreateManyWithoutUserInput
+}
+
+input UserCreateWithoutListsInput {
+  id: ID
+  name: String!
+  email: String!
+  password: String!
+  events: EventCreateManyWithoutUserInput
 }
 
 type UserEdge {
@@ -610,14 +731,52 @@ input UserUpdateInput {
   name: String
   email: String
   password: String
-  places: PlaceUpdateManyInput
-  events: EventUpdateManyInput
+  lists: ListUpdateManyWithoutUserInput
+  events: EventUpdateManyWithoutUserInput
 }
 
 input UserUpdateManyMutationInput {
   name: String
   email: String
   password: String
+}
+
+input UserUpdateOneRequiredWithoutEventsInput {
+  create: UserCreateWithoutEventsInput
+  update: UserUpdateWithoutEventsDataInput
+  upsert: UserUpsertWithoutEventsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneRequiredWithoutListsInput {
+  create: UserCreateWithoutListsInput
+  update: UserUpdateWithoutListsDataInput
+  upsert: UserUpsertWithoutListsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutEventsDataInput {
+  name: String
+  email: String
+  password: String
+  lists: ListUpdateManyWithoutUserInput
+}
+
+input UserUpdateWithoutListsDataInput {
+  name: String
+  email: String
+  password: String
+  events: EventUpdateManyWithoutUserInput
+}
+
+input UserUpsertWithoutEventsInput {
+  update: UserUpdateWithoutEventsDataInput!
+  create: UserCreateWithoutEventsInput!
+}
+
+input UserUpsertWithoutListsInput {
+  update: UserUpdateWithoutListsDataInput!
+  create: UserCreateWithoutListsInput!
 }
 
 input UserWhereInput {
@@ -677,9 +836,9 @@ input UserWhereInput {
   password_not_starts_with: String
   password_ends_with: String
   password_not_ends_with: String
-  places_every: PlaceWhereInput
-  places_some: PlaceWhereInput
-  places_none: PlaceWhereInput
+  lists_every: ListWhereInput
+  lists_some: ListWhereInput
+  lists_none: ListWhereInput
   events_every: EventWhereInput
   events_some: EventWhereInput
   events_none: EventWhereInput
