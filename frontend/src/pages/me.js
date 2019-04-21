@@ -6,7 +6,6 @@ import Layout from "../components/layout"
 import PleaseLogin from "../containers/pleaseLogin"
 import Logout from "../containers/logout"
 import Auth from "../components/auth"
-import ThemeToggle from "../components/themeToggle"
 
 import { CURRENT_USER_QUERY } from "../containers/user"
 
@@ -32,7 +31,6 @@ function Profile() {
       <Heading level={2}>Hey, {data.me.name} 👋</Heading>
       <Heading level={2}>Lists</Heading>
       <Heading level={2}>Events</Heading>
-      <ThemeToggle />
       <Logout />
     </Box>
   )
