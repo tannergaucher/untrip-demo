@@ -94,6 +94,57 @@ const Mutation = {
   deleteList: (parent, { id }, context) => {
     return context.prisma.deleteList({ id })
   },
+  togglePlace: async (parent, { listId, gcmsId }, context) => {
+    const userId = getUserId(context)
+
+    if (!userId) {
+      throw new AuthError()
+    }
+
+    // query users list of listId for a place with gcmsId of gcmsId
+    const [existing] = await context.prisma
+      .user({ id: userId })
+      .lists({
+        where: {
+          id: listId,
+        },
+      })
+      .places({
+        where: {
+          gcmsId: gcmsId,
+        },
+      })
+
+    if (existing.places.length) {
+      // remove place from list
+      return context.prisma.updateList({
+        where: {
+          id: listId,
+        },
+        data: {
+          places: {
+            delete: {
+              id: existing.places[0].id,
+            },
+          },
+        },
+      })
+    } else {
+      // add place to list
+      return context.prisma.updateList({
+        where: {
+          id: listId,
+        },
+        data: {
+          places: {
+            create: {
+              gcmsId: gcmsId,
+            },
+          },
+        },
+      })
+    }
+  },
 }
 
 module.exports = {

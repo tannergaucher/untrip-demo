@@ -25,8 +25,6 @@ export default function menu() {
               <Heading level={2}>Menu</Heading>
               <Heading level={2}>My Lists</Heading>
               <Heading level={2}>My Places</Heading>
-              {/* Replace with <ToggleAuth/> */}
-              <Heading level={2}>Sign In / Sign Out</Heading>
             </Box>
           </Layer>
         </>

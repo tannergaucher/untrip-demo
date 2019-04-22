@@ -8,6 +8,14 @@ const CURRENT_USER_QUERY = gql`
       id
       email
       name
+      lists {
+        id
+        title
+        places {
+          id
+          gcmsId
+        }
+      }
     }
   }
 `

@@ -318,6 +318,7 @@ export interface PlaceWhereInput {
   gcmsId_not_starts_with?: String;
   gcmsId_ends_with?: String;
   gcmsId_not_ends_with?: String;
+  list?: ListWhereInput;
   AND?: PlaceWhereInput[] | PlaceWhereInput;
   OR?: PlaceWhereInput[] | PlaceWhereInput;
   NOT?: PlaceWhereInput[] | PlaceWhereInput;
@@ -432,7 +433,6 @@ export type ListWhereUniqueInput = AtLeastOne<{
 
 export type PlaceWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
-  gcmsId?: String;
 }>;
 
 export type UserWhereUniqueInput = AtLeastOne<{
@@ -467,15 +467,15 @@ export interface ListCreateManyWithoutUserInput {
 export interface ListCreateWithoutUserInput {
   id?: ID_Input;
   title: String;
-  places?: PlaceCreateManyInput;
+  places?: PlaceCreateManyWithoutListInput;
 }
 
-export interface PlaceCreateManyInput {
-  create?: PlaceCreateInput[] | PlaceCreateInput;
+export interface PlaceCreateManyWithoutListInput {
+  create?: PlaceCreateWithoutListInput[] | PlaceCreateWithoutListInput;
   connect?: PlaceWhereUniqueInput[] | PlaceWhereUniqueInput;
 }
 
-export interface PlaceCreateInput {
+export interface PlaceCreateWithoutListInput {
   id?: ID_Input;
   gcmsId: String;
 }
@@ -524,40 +524,40 @@ export interface ListUpdateWithWhereUniqueWithoutUserInput {
 
 export interface ListUpdateWithoutUserDataInput {
   title?: String;
-  places?: PlaceUpdateManyInput;
+  places?: PlaceUpdateManyWithoutListInput;
 }
 
-export interface PlaceUpdateManyInput {
-  create?: PlaceCreateInput[] | PlaceCreateInput;
-  update?:
-    | PlaceUpdateWithWhereUniqueNestedInput[]
-    | PlaceUpdateWithWhereUniqueNestedInput;
-  upsert?:
-    | PlaceUpsertWithWhereUniqueNestedInput[]
-    | PlaceUpsertWithWhereUniqueNestedInput;
+export interface PlaceUpdateManyWithoutListInput {
+  create?: PlaceCreateWithoutListInput[] | PlaceCreateWithoutListInput;
   delete?: PlaceWhereUniqueInput[] | PlaceWhereUniqueInput;
   connect?: PlaceWhereUniqueInput[] | PlaceWhereUniqueInput;
   set?: PlaceWhereUniqueInput[] | PlaceWhereUniqueInput;
   disconnect?: PlaceWhereUniqueInput[] | PlaceWhereUniqueInput;
+  update?:
+    | PlaceUpdateWithWhereUniqueWithoutListInput[]
+    | PlaceUpdateWithWhereUniqueWithoutListInput;
+  upsert?:
+    | PlaceUpsertWithWhereUniqueWithoutListInput[]
+    | PlaceUpsertWithWhereUniqueWithoutListInput;
   deleteMany?: PlaceScalarWhereInput[] | PlaceScalarWhereInput;
   updateMany?:
     | PlaceUpdateManyWithWhereNestedInput[]
     | PlaceUpdateManyWithWhereNestedInput;
 }
 
-export interface PlaceUpdateWithWhereUniqueNestedInput {
+export interface PlaceUpdateWithWhereUniqueWithoutListInput {
   where: PlaceWhereUniqueInput;
-  data: PlaceUpdateDataInput;
+  data: PlaceUpdateWithoutListDataInput;
 }
 
-export interface PlaceUpdateDataInput {
+export interface PlaceUpdateWithoutListDataInput {
   gcmsId?: String;
 }
 
-export interface PlaceUpsertWithWhereUniqueNestedInput {
+export interface PlaceUpsertWithWhereUniqueWithoutListInput {
   where: PlaceWhereUniqueInput;
-  update: PlaceUpdateDataInput;
-  create: PlaceCreateInput;
+  update: PlaceUpdateWithoutListDataInput;
+  create: PlaceCreateWithoutListInput;
 }
 
 export interface PlaceScalarWhereInput {
@@ -664,7 +664,7 @@ export interface EventUpdateManyMutationInput {
 export interface ListCreateInput {
   id?: ID_Input;
   title: String;
-  places?: PlaceCreateManyInput;
+  places?: PlaceCreateManyWithoutListInput;
   user: UserCreateOneWithoutListsInput;
 }
 
@@ -693,7 +693,7 @@ export interface EventCreateWithoutUserInput {
 
 export interface ListUpdateInput {
   title?: String;
-  places?: PlaceUpdateManyInput;
+  places?: PlaceUpdateManyWithoutListInput;
   user?: UserUpdateOneRequiredWithoutListsInput;
 }
 
@@ -796,8 +796,43 @@ export interface ListUpdateManyMutationInput {
   title?: String;
 }
 
+export interface PlaceCreateInput {
+  id?: ID_Input;
+  gcmsId: String;
+  list: ListCreateOneWithoutPlacesInput;
+}
+
+export interface ListCreateOneWithoutPlacesInput {
+  create?: ListCreateWithoutPlacesInput;
+  connect?: ListWhereUniqueInput;
+}
+
+export interface ListCreateWithoutPlacesInput {
+  id?: ID_Input;
+  title: String;
+  user: UserCreateOneWithoutListsInput;
+}
+
 export interface PlaceUpdateInput {
   gcmsId?: String;
+  list?: ListUpdateOneRequiredWithoutPlacesInput;
+}
+
+export interface ListUpdateOneRequiredWithoutPlacesInput {
+  create?: ListCreateWithoutPlacesInput;
+  update?: ListUpdateWithoutPlacesDataInput;
+  upsert?: ListUpsertWithoutPlacesInput;
+  connect?: ListWhereUniqueInput;
+}
+
+export interface ListUpdateWithoutPlacesDataInput {
+  title?: String;
+  user?: UserUpdateOneRequiredWithoutListsInput;
+}
+
+export interface ListUpsertWithoutPlacesInput {
+  update: ListUpdateWithoutPlacesDataInput;
+  create: ListCreateWithoutPlacesInput;
 }
 
 export interface PlaceUpdateManyMutationInput {
@@ -998,6 +1033,7 @@ export interface Place {
 export interface PlacePromise extends Promise<Place>, Fragmentable {
   id: () => Promise<ID_Output>;
   gcmsId: () => Promise<String>;
+  list: <T = ListPromise>() => T;
 }
 
 export interface PlaceSubscription
@@ -1005,6 +1041,7 @@ export interface PlaceSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   gcmsId: () => Promise<AsyncIterator<String>>;
+  list: <T = ListSubscription>() => T;
 }
 
 export interface EventConnection {

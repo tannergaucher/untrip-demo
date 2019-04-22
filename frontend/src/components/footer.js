@@ -1,6 +1,6 @@
 import React from "react"
 import { Button, Box } from "grommet"
-// import { List, Calendar, User } from "grommet-icons"
+import { List, Calendar, User } from "grommet-icons"
 import { navigate } from "@reach/router"
 
 export default function footer() {
@@ -14,19 +14,19 @@ export default function footer() {
       style={{ position: "sticky", bottom: "0" }}
     >
       <Button
-        // icon={<List />}
+        icon={<List />}
         onClick={() => navigate(`/my-lists`)}
         label="Lists"
         plain
       />
       <Button
-        //  icon={<Calendar />}
+        icon={<Calendar />}
         onClick={() => navigate(`/events`)}
         label="Events"
         plain
       />
       <Button
-        // icon={<User />}
+        icon={<User />}
         label="Menu"
         onClick={() => navigate(`/me`)}
         plain

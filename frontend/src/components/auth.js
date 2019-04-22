@@ -3,7 +3,7 @@ import { Tabs, Tab, Box } from "grommet"
 import Login from "../containers/login"
 import Signup from "../containers/signup"
 
-export default () => {
+export default function auth() {
   return (
     <Box fill="vertical" justify="center" alignContent="center">
       <Box

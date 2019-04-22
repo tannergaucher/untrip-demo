@@ -14,6 +14,10 @@ export const client = new ApolloClient({
   fetch,
   link,
   cache,
+  resolvers: {
+    Mutation: {},
+    Query: {},
+  },
 })
 
 const data = {
@@ -22,7 +26,6 @@ const data = {
 
 cache.writeData({ data })
 
-// re-write data after resetting store too
 client.onResetStore(() => {
   cache.writeData({ data })
 })

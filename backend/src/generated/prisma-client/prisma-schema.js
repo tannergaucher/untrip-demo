@@ -221,7 +221,7 @@ type ListConnection {
 input ListCreateInput {
   id: ID
   title: String!
-  places: PlaceCreateManyInput
+  places: PlaceCreateManyWithoutListInput
   user: UserCreateOneWithoutListsInput!
 }
 
@@ -230,10 +230,21 @@ input ListCreateManyWithoutUserInput {
   connect: [ListWhereUniqueInput!]
 }
 
+input ListCreateOneWithoutPlacesInput {
+  create: ListCreateWithoutPlacesInput
+  connect: ListWhereUniqueInput
+}
+
+input ListCreateWithoutPlacesInput {
+  id: ID
+  title: String!
+  user: UserCreateOneWithoutListsInput!
+}
+
 input ListCreateWithoutUserInput {
   id: ID
   title: String!
-  places: PlaceCreateManyInput
+  places: PlaceCreateManyWithoutListInput
 }
 
 type ListEdge {
@@ -307,7 +318,7 @@ input ListSubscriptionWhereInput {
 
 input ListUpdateInput {
   title: String
-  places: PlaceUpdateManyInput
+  places: PlaceUpdateManyWithoutListInput
   user: UserUpdateOneRequiredWithoutListsInput
 }
 
@@ -336,14 +347,31 @@ input ListUpdateManyWithWhereNestedInput {
   data: ListUpdateManyDataInput!
 }
 
+input ListUpdateOneRequiredWithoutPlacesInput {
+  create: ListCreateWithoutPlacesInput
+  update: ListUpdateWithoutPlacesDataInput
+  upsert: ListUpsertWithoutPlacesInput
+  connect: ListWhereUniqueInput
+}
+
+input ListUpdateWithoutPlacesDataInput {
+  title: String
+  user: UserUpdateOneRequiredWithoutListsInput
+}
+
 input ListUpdateWithoutUserDataInput {
   title: String
-  places: PlaceUpdateManyInput
+  places: PlaceUpdateManyWithoutListInput
 }
 
 input ListUpdateWithWhereUniqueWithoutUserInput {
   where: ListWhereUniqueInput!
   data: ListUpdateWithoutUserDataInput!
+}
+
+input ListUpsertWithoutPlacesInput {
+  update: ListUpdateWithoutPlacesDataInput!
+  create: ListCreateWithoutPlacesInput!
 }
 
 input ListUpsertWithWhereUniqueWithoutUserInput {
@@ -443,6 +471,7 @@ type PageInfo {
 type Place {
   id: ID!
   gcmsId: String!
+  list: List!
 }
 
 type PlaceConnection {
@@ -454,11 +483,17 @@ type PlaceConnection {
 input PlaceCreateInput {
   id: ID
   gcmsId: String!
+  list: ListCreateOneWithoutPlacesInput!
 }
 
-input PlaceCreateManyInput {
-  create: [PlaceCreateInput!]
+input PlaceCreateManyWithoutListInput {
+  create: [PlaceCreateWithoutListInput!]
   connect: [PlaceWhereUniqueInput!]
+}
+
+input PlaceCreateWithoutListInput {
+  id: ID
+  gcmsId: String!
 }
 
 type PlaceEdge {
@@ -530,32 +565,29 @@ input PlaceSubscriptionWhereInput {
   NOT: [PlaceSubscriptionWhereInput!]
 }
 
-input PlaceUpdateDataInput {
-  gcmsId: String
-}
-
 input PlaceUpdateInput {
   gcmsId: String
+  list: ListUpdateOneRequiredWithoutPlacesInput
 }
 
 input PlaceUpdateManyDataInput {
   gcmsId: String
 }
 
-input PlaceUpdateManyInput {
-  create: [PlaceCreateInput!]
-  update: [PlaceUpdateWithWhereUniqueNestedInput!]
-  upsert: [PlaceUpsertWithWhereUniqueNestedInput!]
+input PlaceUpdateManyMutationInput {
+  gcmsId: String
+}
+
+input PlaceUpdateManyWithoutListInput {
+  create: [PlaceCreateWithoutListInput!]
   delete: [PlaceWhereUniqueInput!]
   connect: [PlaceWhereUniqueInput!]
   set: [PlaceWhereUniqueInput!]
   disconnect: [PlaceWhereUniqueInput!]
+  update: [PlaceUpdateWithWhereUniqueWithoutListInput!]
+  upsert: [PlaceUpsertWithWhereUniqueWithoutListInput!]
   deleteMany: [PlaceScalarWhereInput!]
   updateMany: [PlaceUpdateManyWithWhereNestedInput!]
-}
-
-input PlaceUpdateManyMutationInput {
-  gcmsId: String
 }
 
 input PlaceUpdateManyWithWhereNestedInput {
@@ -563,15 +595,19 @@ input PlaceUpdateManyWithWhereNestedInput {
   data: PlaceUpdateManyDataInput!
 }
 
-input PlaceUpdateWithWhereUniqueNestedInput {
-  where: PlaceWhereUniqueInput!
-  data: PlaceUpdateDataInput!
+input PlaceUpdateWithoutListDataInput {
+  gcmsId: String
 }
 
-input PlaceUpsertWithWhereUniqueNestedInput {
+input PlaceUpdateWithWhereUniqueWithoutListInput {
   where: PlaceWhereUniqueInput!
-  update: PlaceUpdateDataInput!
-  create: PlaceCreateInput!
+  data: PlaceUpdateWithoutListDataInput!
+}
+
+input PlaceUpsertWithWhereUniqueWithoutListInput {
+  where: PlaceWhereUniqueInput!
+  update: PlaceUpdateWithoutListDataInput!
+  create: PlaceCreateWithoutListInput!
 }
 
 input PlaceWhereInput {
@@ -603,6 +639,7 @@ input PlaceWhereInput {
   gcmsId_not_starts_with: String
   gcmsId_ends_with: String
   gcmsId_not_ends_with: String
+  list: ListWhereInput
   AND: [PlaceWhereInput!]
   OR: [PlaceWhereInput!]
   NOT: [PlaceWhereInput!]
@@ -610,7 +647,6 @@ input PlaceWhereInput {
 
 input PlaceWhereUniqueInput {
   id: ID
-  gcmsId: String
 }
 
 type Query {

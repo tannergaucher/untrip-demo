@@ -9,7 +9,8 @@ type User {
 
 type Place {
   id: ID! @id
-  gcmsId: String! @unique
+  gcmsId: String!
+  list: List!
 }
 
 type Event {
@@ -21,6 +22,6 @@ type Event {
 type List {
   id: ID! @id
   title: String!
-  places: [Place!]!
+  places: [Place!]
   user: User!
 }

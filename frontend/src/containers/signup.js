@@ -51,17 +51,17 @@ export default function Signup() {
               onChange={handleChange}
             />
             <FormField
-              name="name"
-              label="Name"
-              type="text"
-              value={values.name}
-              onChange={handleChange}
-            />
-            <FormField
               name="password"
               label="Password"
               type="password"
               value={values.password}
+              onChange={handleChange}
+            />
+            <FormField
+              name="name"
+              label="Name"
+              type="text"
+              value={values.name}
               onChange={handleChange}
             />
             <Button
