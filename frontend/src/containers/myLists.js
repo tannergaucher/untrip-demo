@@ -7,7 +7,6 @@ import gql from "graphql-tag"
 import CreateList from "../containers/createList"
 import Loading from "../components/loading"
 import Error from "../components/error"
-
 import { CURRENT_USER_QUERY } from "../containers/user"
 
 const TOGGLE_PLACE_MUTATION = gql`
@@ -39,11 +38,10 @@ export default function myLists({ gcmsId }) {
           update={(cache, payload) => {
             // manually update cache to match server
             const data = cache.readQuery({ query: CURRENT_USER_QUERY })
-            console.log(data)
 
             // pull the list out of currentUserQuery
             const [myList] = data.me.lists.filter(
-              cacheList => cacheList.id === payload.data.togglePlace.id
+              cacheList => cacheList.id === list.id
             )
 
             //  pull the place from the list
@@ -65,6 +63,15 @@ export default function myLists({ gcmsId }) {
 
             cache.writeQuery({ query: CURRENT_USER_QUERY, data })
           }}
+          optimisticResponse={{
+            __typename: "Mutation",
+            togglePlace: {
+              __typename: "Place",
+              listId: list.id,
+              gcmsId: gcmsId,
+              id: new Date(),
+            },
+          }}
         >
           {toggleList => (
             <CheckBox
@@ -72,7 +79,6 @@ export default function myLists({ gcmsId }) {
               checked={isPlaceInList(gcmsId, list.places)}
               onChange={e => {
                 e.preventDefault()
-                console.log("toggle list")
                 toggleList()
               }}
             />

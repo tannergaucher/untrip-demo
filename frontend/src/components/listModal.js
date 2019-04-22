@@ -1,12 +1,18 @@
 import React, { useState } from "react"
 import { Box, Layer, Button } from "grommet"
+import { Add } from "grommet-icons"
 import MyLists from "../containers/myLists"
 
 export default function listModal({ gcmsId }) {
   const [show, setShow] = useState(false)
   return (
     <>
-      <Button label="Add name to list" onClick={() => setShow(true)} plain />
+      <Button
+        label="Add To List"
+        onClick={() => setShow(true)}
+        icon={<Add size="small" />}
+        alignSelf="start"
+      />
       {show && (
         <Box>
           <Layer

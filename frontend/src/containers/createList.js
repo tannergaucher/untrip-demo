@@ -23,7 +23,8 @@ export default function createList({ gcmsId }) {
           label="New List"
           icon={<Add size="small" />}
           onClick={() => setShow(true)}
-          plain
+          alignSelf="start"
+          margin={{ vertical: "medium" }}
         />
       )}
 
