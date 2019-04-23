@@ -2,6 +2,8 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Grommet, Box } from "grommet"
 import styled from "styled-components"
+import { Query } from "react-apollo"
+import { CURRENT_USER_QUERY } from "../containers/user"
 
 import Header from "./header"
 import Footer from "./footer"
@@ -30,17 +32,23 @@ const theme = {
   },
 }
 
-const Layout = ({ children }) => (
-  <Grommet theme={theme}>
-    <App>
-      <Header />
-      <Box as="main" style={{ gridArea: "main" }} background="">
-        {children}
-      </Box>
-      <Footer />
-    </App>
-  </Grommet>
-)
+function Layout({ children }) {
+  return (
+    <Query query={CURRENT_USER_QUERY}>
+      {() => (
+        <Grommet theme={theme}>
+          <App>
+            <Header />
+            <Box as="main" style={{ gridArea: "main" }} background="">
+              {children}
+            </Box>
+            <Footer />
+          </App>
+        </Grommet>
+      )}
+    </Query>
+  )
+}
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,

@@ -1,9 +1,9 @@
 import React, { useState } from "react"
-import { Box, Layer, Button } from "grommet"
-import { Add } from "grommet-icons"
-import MyLists from "../containers/myLists"
+import { Box, Layer, Button, Heading } from "grommet"
+import { Add, Close } from "grommet-icons"
+import Lists from "../containers/Lists"
 
-export default function listModal({ gcmsId }) {
+export default function listModal({ name, gcmsId }) {
   const [show, setShow] = useState(false)
   return (
     <>
@@ -21,8 +21,17 @@ export default function listModal({ gcmsId }) {
             full={true}
             margin="large"
             pad="large"
+            style={{ overflowY: "scroll" }}
           >
-            <MyLists gcmsId={gcmsId} />
+            <Button
+              icon={<Close />}
+              alignSelf="end"
+              onClick={() => setShow(false)}
+            />
+            <Heading level={2} margin="large" textAlign="center">
+              Add NAME to list
+            </Heading>
+            <Lists gcmsId={gcmsId} />
           </Layer>
         </Box>
       )}

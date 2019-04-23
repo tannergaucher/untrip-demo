@@ -38,7 +38,6 @@ type List {
 
 type Query {
   me: User
-  # listPlaces(listId: ID!): [Place!]
 }
 
 type Mutation {
@@ -47,6 +46,6 @@ type Mutation {
   logout: SuccessMessage
   toggleEvent(gcmsId: String!): Event
   createList(title: String!, gcmsId: String!): List
-  deleteList(id: ID!): List
+  deleteList(listId: ID!): List
   togglePlace(listId: ID!, gcmsId: String!): Place
 }

@@ -1,14 +1,17 @@
-import React from "react"
-import { Box, Heading, CheckBox } from "grommet"
+import React, { useState } from "react"
+import { Box, Heading, CheckBox, Menu, Layer, Button } from "grommet"
+import { Edit, Trash, FormPreviousLink } from "grommet-icons"
 import { useQuery } from "react-apollo-hooks"
 import { Mutation } from "react-apollo"
 import gql from "graphql-tag"
 
-import CreateList from "../containers/createList"
+import CreateList from "./createList"
 import Loading from "../components/loading"
 import Error from "../components/error"
-import { CURRENT_USER_QUERY } from "../containers/user"
+import DeleteList from "../containers/deleteList"
+import { CURRENT_USER_QUERY } from "./user"
 
+// TODO: REFACTOR TO CONTAINERS / TOGGLEPLACE.JS
 const TOGGLE_PLACE_MUTATION = gql`
   mutation TOGGLE_PLACE_MUTATION($listId: ID!, $gcmsId: String!) {
     togglePlace(listId: $listId, gcmsId: $gcmsId) {
@@ -22,7 +25,7 @@ function isPlaceInList(gcmsId, places) {
   return isPlace.length ? true : false
 }
 
-export default function myLists({ gcmsId }) {
+export default function Lists({ gcmsId }) {
   const { data, loading, error } = useQuery(CURRENT_USER_QUERY)
 
   if (loading) return <Loading />
@@ -74,18 +77,79 @@ export default function myLists({ gcmsId }) {
           }}
         >
           {toggleList => (
-            <CheckBox
-              label={<Heading level={3}>{list.title}</Heading>}
-              checked={isPlaceInList(gcmsId, list.places)}
-              onChange={e => {
-                e.preventDefault()
-                toggleList()
-              }}
-            />
+            <>
+              <CheckBox
+                label={
+                  <>
+                    <Heading level={3}>{list.title}</Heading>
+                    <ListMenu listId={list.id} />
+                  </>
+                }
+                checked={isPlaceInList(gcmsId, list.places)}
+                onChange={e => {
+                  e.preventDefault()
+                  toggleList()
+                }}
+              />
+            </>
           )}
         </Mutation>
       ))}
       <CreateList gcmsId={gcmsId} />
     </Box>
+  )
+}
+
+function ListMenu({ listId }) {
+  const [confirm, setConfirm] = useState(false)
+  return (
+    <>
+      <Menu
+        icon={<Edit size="small" />}
+        items={[
+          {
+            label: "Delete list",
+            onClick: () => {
+              setConfirm(true)
+            },
+          },
+          // { label: "Rename" },
+        ]}
+      />
+      {confirm && (
+        <Layer
+          onEsc={() => setConfirm(false)}
+          onClickOutside={() => setConfirm(false)}
+          responsive={false}
+        >
+          <Heading level={4} margin="medium">
+            Are you sure you want to delete LIST NAME?
+          </Heading>
+          <Box direction="row" margin="medium">
+            <Button
+              label="Back"
+              margin="medium"
+              icon={<FormPreviousLink size="small" />}
+              onClick={() => setConfirm(false)}
+            />
+
+            <DeleteList setConfirm={setConfirm} listId={listId} />
+
+            {/* <Button
+              label="Delete"
+              icon={<Trash size="small" />}
+              alignSelf="center"
+              color="status-critical"
+              primary
+              margin="medium"
+              onClick={() => {
+                console.log("delete list mutation")
+                setConfirm(false)
+              }}
+            /> */}
+          </Box>
+        </Layer>
+      )}
+    </>
   )
 }

@@ -3,6 +3,7 @@ import { Mutation } from "react-apollo"
 import { Button, Form, FormField } from "grommet"
 import { Add } from "grommet-icons"
 import gql from "graphql-tag"
+import { CURRENT_USER_QUERY } from "./user"
 
 const CREATE_LIST_MUTATION = gql`
   mutation CREATE_LIST_MUTATION($title: String!, $gcmsId: String!) {
@@ -29,7 +30,14 @@ export default function createList({ gcmsId }) {
       )}
 
       {show && (
-        <Mutation mutation={CREATE_LIST_MUTATION} variables={{ title, gcmsId }}>
+        <Mutation
+          mutation={CREATE_LIST_MUTATION}
+          variables={{ title, gcmsId }}
+          update={(cache, payload) => {
+            const data = cache.readQuery({ query: CURRENT_USER_QUERY })
+            console.log(data)
+          }}
+        >
           {createList => (
             <Form
               onSubmit={e => {

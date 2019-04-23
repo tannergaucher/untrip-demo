@@ -91,8 +91,12 @@ const Mutation = {
     })
     return list
   },
-  deleteList: (parent, { id }, context) => {
-    return context.prisma.deleteList({ id })
+  deleteList: (parent, { listId }, context) => {
+    return context.prisma.deleteList({ id: listId })
+    // Error: The change you are trying to make would violate the required relation 'ListToPlace' between List and Place
+    // Must also delete the relations: places in that list
+
+    // I think I have to use @relation, to enable cascading delete
   },
   togglePlace: async (parent, { listId, gcmsId }, context) => {
     const userId = getUserId(context)
