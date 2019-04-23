@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Box, Heading, CheckBox, Menu, Layer, Button } from "grommet"
-import { Edit, Trash, FormPreviousLink } from "grommet-icons"
+import { Edit, FormPreviousLink } from "grommet-icons"
 import { useQuery } from "react-apollo-hooks"
 import { Mutation } from "react-apollo"
 import gql from "graphql-tag"

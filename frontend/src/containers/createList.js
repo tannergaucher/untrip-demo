@@ -43,6 +43,21 @@ export default function createList({ gcmsId }) {
             data.me.lists = [...data.me.lists, ...payload.data.createList]
             cache.writeQuery({ query: CURRENT_USER_QUERY, data })
           }}
+          optimisticResponse={{
+            __typename: "Mutation",
+            createList: {
+              __typename: "List",
+              id: new Date(),
+              title: title,
+              places: [
+                {
+                  __typename: "Place",
+                  id: new Date(),
+                  gcmsId: gcmsId,
+                },
+              ],
+            },
+          }}
         >
           {createList => (
             <Form
@@ -50,6 +65,7 @@ export default function createList({ gcmsId }) {
                 e.preventDefault()
                 createList()
                 setShow(false)
+                setTitle("")
               }}
             >
               <FormField
