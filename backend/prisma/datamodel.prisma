@@ -7,21 +7,21 @@ type User {
   events: [Event!]
 }
 
+type List {
+  id: ID! @id
+  title: String!
+  places: [Place!] @relation(name: "PlacesOfList", onDelete: CASCADE)
+  user: User!
+}
+
 type Place {
   id: ID! @id
   gcmsId: String!
-  list: List!
+  list: List! @relation(name: "PlacesOfList")
 }
 
 type Event {
   id: ID! @id
   gcmsId: String! @unique
-  user: User!
-}
-
-type List {
-  id: ID! @id
-  title: String!
-  places: [Place!]
   user: User!
 }

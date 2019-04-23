@@ -1514,15 +1514,15 @@ export const models: Model[] = [
     embedded: false
   },
   {
+    name: "List",
+    embedded: false
+  },
+  {
     name: "Place",
     embedded: false
   },
   {
     name: "Event",
-    embedded: false
-  },
-  {
-    name: "List",
     embedded: false
   }
 ];

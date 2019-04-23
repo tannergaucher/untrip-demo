@@ -35,7 +35,7 @@ export default function deleteList({ setConfirm, listId }) {
           onClick={() => {
             console.log("delete list mutation")
             setConfirm(false)
-            // deleteList()
+            deleteList()
           }}
         />
       )}
