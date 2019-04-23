@@ -41,17 +41,14 @@ export default function Lists({ gcmsId }) {
           update={(cache, payload) => {
             // manually update cache to match server
             const data = cache.readQuery({ query: CURRENT_USER_QUERY })
-
             // pull the list out of currentUserQuery
             const [myList] = data.me.lists.filter(
               cacheList => cacheList.id === list.id
             )
-
             //  pull the place from the list
             const [existingPlace] = myList.places.filter(
               place => place.gcmsId === gcmsId
             )
-
             if (existingPlace) {
               // remove place
               myList.places = myList.places.filter(
@@ -63,7 +60,6 @@ export default function Lists({ gcmsId }) {
               payload.data.togglePlace.gcmsId = gcmsId
               myList.places.push(payload.data.togglePlace)
             }
-
             cache.writeQuery({ query: CURRENT_USER_QUERY, data })
           }}
           optimisticResponse={{

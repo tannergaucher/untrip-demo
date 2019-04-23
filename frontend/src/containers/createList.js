@@ -9,6 +9,11 @@ const CREATE_LIST_MUTATION = gql`
   mutation CREATE_LIST_MUTATION($title: String!, $gcmsId: String!) {
     createList(title: $title, gcmsId: $gcmsId) {
       id
+      title
+      places {
+        id
+        gcmsId
+      }
     }
   }
 `
@@ -35,7 +40,8 @@ export default function createList({ gcmsId }) {
           variables={{ title, gcmsId }}
           update={(cache, payload) => {
             const data = cache.readQuery({ query: CURRENT_USER_QUERY })
-            console.log(data)
+            data.me.lists = [...data.me.lists, ...payload.data.createList]
+            cache.writeQuery({ query: CURRENT_USER_QUERY, data })
           }}
         >
           {createList => (
