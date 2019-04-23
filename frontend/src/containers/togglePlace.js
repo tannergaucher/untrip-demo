@@ -8,14 +8,19 @@ import gql from "graphql-tag"
 import CreateList from "./createList"
 import Loading from "../components/loading"
 import Error from "../components/error"
-import DeleteList from "../containers/deleteList"
+import DeleteList from "./deleteList"
 import { CURRENT_USER_QUERY } from "./user"
 
-// TODO: REFACTOR TO CONTAINERS / TOGGLEPLACE.JS
 const TOGGLE_PLACE_MUTATION = gql`
-  mutation TOGGLE_PLACE_MUTATION($listId: ID!, $gcmsId: String!) {
-    togglePlace(listId: $listId, gcmsId: $gcmsId) {
+  mutation TOGGLE_PLACE_MUTATION(
+    $listId: ID!
+    $gcmsId: String!
+    $name: String!
+  ) {
+    togglePlace(listId: $listId, gcmsId: $gcmsId, name: $name) {
       id
+      gcmsId
+      name
     }
   }
 `
@@ -25,7 +30,7 @@ function isPlaceInList(gcmsId, places) {
   return isPlace.length ? true : false
 }
 
-export default function Lists({ gcmsId }) {
+export default function TogglePlace({ gcmsId, name }) {
   const { data, loading, error } = useQuery(CURRENT_USER_QUERY)
 
   if (loading) return <Loading />
@@ -36,28 +41,23 @@ export default function Lists({ gcmsId }) {
       {data.me.lists.map(list => (
         <Mutation
           mutation={TOGGLE_PLACE_MUTATION}
-          variables={{ listId: list.id, gcmsId }}
+          variables={{ listId: list.id, gcmsId, name }}
           key={list.id}
           update={(cache, payload) => {
-            // manually update cache to match server
             const data = cache.readQuery({ query: CURRENT_USER_QUERY })
-            // pull the list out of currentUserQuery
             const [myList] = data.me.lists.filter(
               cacheList => cacheList.id === list.id
             )
-            //  pull the place from the list
             const [existingPlace] = myList.places.filter(
               place => place.gcmsId === gcmsId
             )
             if (existingPlace) {
-              // remove place
               myList.places = myList.places.filter(
                 place => !place.gcmsId === gcmsId
               )
             } else {
-              // add place
-              // assign gcmsId property to place payload
               payload.data.togglePlace.gcmsId = gcmsId
+              payload.data.togglePlace.name = name
               myList.places.push(payload.data.togglePlace)
             }
             cache.writeQuery({ query: CURRENT_USER_QUERY, data })
@@ -67,8 +67,9 @@ export default function Lists({ gcmsId }) {
             togglePlace: {
               __typename: "Place",
               listId: list.id,
-              gcmsId: gcmsId,
               id: new Date(),
+              gcmsId,
+              name,
             },
           }}
         >
@@ -91,7 +92,7 @@ export default function Lists({ gcmsId }) {
           )}
         </Mutation>
       ))}
-      <CreateList gcmsId={gcmsId} />
+      <CreateList gcmsId={gcmsId} name={name} />
     </Box>
   )
 }
@@ -109,7 +110,6 @@ function ListMenu({ listId }) {
               setConfirm(true)
             },
           },
-          // { label: "Rename" },
         ]}
       />
       {confirm && (
@@ -128,21 +128,7 @@ function ListMenu({ listId }) {
               icon={<FormPreviousLink size="small" />}
               onClick={() => setConfirm(false)}
             />
-
             <DeleteList setConfirm={setConfirm} listId={listId} />
-
-            {/* <Button
-              label="Delete"
-              icon={<Trash size="small" />}
-              alignSelf="center"
-              color="status-critical"
-              primary
-              margin="medium"
-              onClick={() => {
-                console.log("delete list mutation")
-                setConfirm(false)
-              }}
-            /> */}
           </Box>
         </Layer>
       )}

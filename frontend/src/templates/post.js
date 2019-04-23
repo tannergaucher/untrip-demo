@@ -9,10 +9,10 @@ import Event from "../components/event"
 export default function post({ data }) {
   return (
     <Layout>
-      <GraphImg image={data.gcms.post.image} maxWidth={900} />
-      <Heading margin="large" level={1}>
+      <Heading margin="medium" level={1}>
         {data.gcms.post.title}
       </Heading>
+      <GraphImg image={data.gcms.post.image} maxWidth={900} />
 
       <Text
         size="large"

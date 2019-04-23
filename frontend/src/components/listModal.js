@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Box, Layer, Button, Heading } from "grommet"
 import { Add, Close } from "grommet-icons"
-import Lists from "../containers/Lists"
+import TogglePlace from "../containers/togglePlace"
 
 export default function listModal({ name, gcmsId }) {
   const [show, setShow] = useState(false)
@@ -12,6 +12,7 @@ export default function listModal({ name, gcmsId }) {
         onClick={() => setShow(true)}
         icon={<Add size="small" />}
         alignSelf="start"
+        reverse={true}
       />
       {show && (
         <Box>
@@ -28,10 +29,10 @@ export default function listModal({ name, gcmsId }) {
               alignSelf="end"
               onClick={() => setShow(false)}
             />
-            <Heading level={2} margin="large" textAlign="center">
-              Add NAME to list
+            <Heading level={2} margin="large">
+              {`Add ${name} to List`}
             </Heading>
-            <Lists gcmsId={gcmsId} />
+            <TogglePlace gcmsId={gcmsId} name={name} />
           </Layer>
         </Box>
       )}

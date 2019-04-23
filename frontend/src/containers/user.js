@@ -14,6 +14,7 @@ const CURRENT_USER_QUERY = gql`
         places {
           id
           gcmsId
+          name
         }
       }
     }

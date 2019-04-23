@@ -3,6 +3,8 @@ import { useStaticQuery, graphql } from "gatsby"
 import { Heading, Box } from "grommet"
 import Link from "../components/styles/link"
 
+import Menu from "../components/menu"
+
 export default () => {
   const { site } = useStaticQuery(graphql`
     query HeaderQuery {
@@ -15,13 +17,18 @@ export default () => {
   `)
 
   return (
-    <Box as="header" style={{ gridArea: "header" }} background="">
-      <Link to="/" style={{}}>
-        <Heading level={4} margin="medium" color="neutral-2">
+    <Box
+      as="header"
+      direction="row"
+      justify="between"
+      style={{ gridArea: "header" }}
+    >
+      <Link to="/">
+        <Heading level={3} margin="medium" color="dark-4">
           {site.siteMetadata.title}
         </Heading>
       </Link>
-      {/* <Menu /> */}
+      <Menu />
     </Box>
   )
 }

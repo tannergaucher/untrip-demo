@@ -71,7 +71,7 @@ const Mutation = {
       return event
     }
   },
-  createList: async (parent, { title, gcmsId }, context) => {
+  createList: async (parent, { title, gcmsId, name }, context) => {
     const userId = getUserId(context)
     if (!userId) {
       throw new AuthError()
@@ -81,6 +81,7 @@ const Mutation = {
       places: {
         create: {
           gcmsId: gcmsId,
+          name: name,
         },
       },
       user: {
@@ -93,12 +94,8 @@ const Mutation = {
   },
   deleteList: (parent, { listId }, context) => {
     return context.prisma.deleteList({ id: listId })
-    // Error: The change you are trying to make would violate the required relation 'ListToPlace' between List and Place
-    // Must also delete the relations: places in that list
-
-    // I think I have to use @relation, to enable cascading delete
   },
-  togglePlace: async (parent, { listId, gcmsId }, context) => {
+  togglePlace: async (parent, { listId, gcmsId, name }, context) => {
     const userId = getUserId(context)
 
     if (!userId) {
@@ -143,6 +140,7 @@ const Mutation = {
           places: {
             create: {
               gcmsId: gcmsId,
+              name: name,
             },
           },
         },

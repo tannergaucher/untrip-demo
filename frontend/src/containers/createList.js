@@ -6,19 +6,24 @@ import gql from "graphql-tag"
 import { CURRENT_USER_QUERY } from "./user"
 
 const CREATE_LIST_MUTATION = gql`
-  mutation CREATE_LIST_MUTATION($title: String!, $gcmsId: String!) {
-    createList(title: $title, gcmsId: $gcmsId) {
+  mutation CREATE_LIST_MUTATION(
+    $title: String!
+    $gcmsId: String!
+    $name: String!
+  ) {
+    createList(title: $title, gcmsId: $gcmsId, name: $name) {
       id
       title
       places {
         id
         gcmsId
+        name
       }
     }
   }
 `
 
-export default function createList({ gcmsId }) {
+export default function createList({ gcmsId, name }) {
   const [show, setShow] = useState(false)
   const [title, setTitle] = useState("")
 
@@ -37,7 +42,7 @@ export default function createList({ gcmsId }) {
       {show && (
         <Mutation
           mutation={CREATE_LIST_MUTATION}
-          variables={{ title, gcmsId }}
+          variables={{ title, gcmsId, name }}
           update={(cache, payload) => {
             const data = cache.readQuery({ query: CURRENT_USER_QUERY })
             data.me.lists = [...data.me.lists, ...payload.data.createList]
@@ -54,6 +59,7 @@ export default function createList({ gcmsId }) {
                   __typename: "Place",
                   id: new Date(),
                   gcmsId: gcmsId,
+                  name: name,
                 },
               ],
             },

@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Fullstack Gatsby Demo`,
+    title: `Untrip`,
     description: ``,
     author: `tannermichaelgaucher@gmail.com`,
   },

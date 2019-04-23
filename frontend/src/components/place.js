@@ -10,7 +10,7 @@ export default function place({ name, gcmsId }) {
         Place
       </Heading>
       <Heading level={3}>{name}</Heading>
-      <ListModal gcmsId={gcmsId} />
+      <ListModal gcmsId={gcmsId} name={name} />
     </Box>
   )
 }

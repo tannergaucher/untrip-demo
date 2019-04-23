@@ -22,7 +22,7 @@ const App = styled.div`
 const theme = {
   global: {
     colors: {
-      // brand: "rgba(0, 0, 0, .8)",
+      brand: "tomato",
     },
   },
   button: {

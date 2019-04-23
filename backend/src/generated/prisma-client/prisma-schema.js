@@ -470,7 +470,8 @@ type PageInfo {
 
 type Place {
   id: ID!
-  gcmsId: String!
+  gcmsId: String
+  name: String
   list: List!
 }
 
@@ -482,7 +483,8 @@ type PlaceConnection {
 
 input PlaceCreateInput {
   id: ID
-  gcmsId: String!
+  gcmsId: String
+  name: String
   list: ListCreateOneWithoutPlacesInput!
 }
 
@@ -493,7 +495,8 @@ input PlaceCreateManyWithoutListInput {
 
 input PlaceCreateWithoutListInput {
   id: ID
-  gcmsId: String!
+  gcmsId: String
+  name: String
 }
 
 type PlaceEdge {
@@ -506,11 +509,14 @@ enum PlaceOrderByInput {
   id_DESC
   gcmsId_ASC
   gcmsId_DESC
+  name_ASC
+  name_DESC
 }
 
 type PlacePreviousValues {
   id: ID!
-  gcmsId: String!
+  gcmsId: String
+  name: String
 }
 
 input PlaceScalarWhereInput {
@@ -542,6 +548,20 @@ input PlaceScalarWhereInput {
   gcmsId_not_starts_with: String
   gcmsId_ends_with: String
   gcmsId_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
   AND: [PlaceScalarWhereInput!]
   OR: [PlaceScalarWhereInput!]
   NOT: [PlaceScalarWhereInput!]
@@ -567,15 +587,18 @@ input PlaceSubscriptionWhereInput {
 
 input PlaceUpdateInput {
   gcmsId: String
+  name: String
   list: ListUpdateOneRequiredWithoutPlacesInput
 }
 
 input PlaceUpdateManyDataInput {
   gcmsId: String
+  name: String
 }
 
 input PlaceUpdateManyMutationInput {
   gcmsId: String
+  name: String
 }
 
 input PlaceUpdateManyWithoutListInput {
@@ -597,6 +620,7 @@ input PlaceUpdateManyWithWhereNestedInput {
 
 input PlaceUpdateWithoutListDataInput {
   gcmsId: String
+  name: String
 }
 
 input PlaceUpdateWithWhereUniqueWithoutListInput {
@@ -639,6 +663,20 @@ input PlaceWhereInput {
   gcmsId_not_starts_with: String
   gcmsId_ends_with: String
   gcmsId_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
   list: ListWhereInput
   AND: [PlaceWhereInput!]
   OR: [PlaceWhereInput!]

@@ -16,7 +16,8 @@ type List {
 
 type Place {
   id: ID! @id
-  gcmsId: String!
+  gcmsId: String
+  name: String
   list: List! @relation(name: "PlacesOfList")
 }
 
