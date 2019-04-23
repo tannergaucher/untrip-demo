@@ -29,6 +29,13 @@ export default function deleteList({ setConfirm, listId }) {
         // write data back to the cache
         cache.writeQuery({ query: CURRENT_USER_QUERY, data })
       }}
+      optimisticResponse={{
+        __typename: "Mutation",
+        deleteList: {
+          __typename: "List",
+          id: listId,
+        },
+      }}
     >
       {deleteList => (
         <Button
