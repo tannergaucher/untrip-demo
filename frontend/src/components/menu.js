@@ -56,10 +56,10 @@ function AccordionMenu() {
           <Heading level={3}>Map Subcategory</Heading>
         </Box>
       </AccordionPanel>
-      <AccordionPanel label={<Heading level={2}>My Untrip</Heading>}>
+      <AccordionPanel label={<Heading level={2}>Profile</Heading>}>
         <Box pad="medium" background="light-2">
           <Link to="/lists">
-            <Heading level={3}>Lists</Heading>
+            <Heading level={3}>My Untrips</Heading>
           </Link>
           <Link to="/events">
             <Heading level={3}>Events</Heading>

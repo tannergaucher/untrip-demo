@@ -13,6 +13,7 @@ export default function listModal({ name, gcmsId }) {
         icon={<Add size="small" />}
         alignSelf="start"
         reverse={true}
+        color="light-3"
       />
       {show && (
         <Box>

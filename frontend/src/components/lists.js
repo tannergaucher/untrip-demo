@@ -1,6 +1,7 @@
 import React from "react"
 import { useQuery } from "react-apollo-hooks"
-import { Heading, Box } from "grommet"
+import { Box, Heading } from "grommet"
+import Link from "../components/styles/link"
 
 import { CURRENT_USER_QUERY } from "../containers/user"
 import Loading from "../components/loading"
@@ -13,22 +14,11 @@ export default function lists() {
   if (error) return <Error error={error.message} />
 
   return (
-    <>
+    <Box margin="medium">
       {data.me.lists.map(list => (
-        <List key={list.id} title={list.title} places={list.places} />
-      ))}
-    </>
-  )
-}
-
-function List({ title, places }) {
-  return (
-    <Box pad="medium">
-      <Heading level={2}>{title}</Heading>
-      {places.map(place => (
-        <Box key={place.id}>
-          <Heading level={4}>Place name</Heading>
-        </Box>
+        <Link to={`/app/list/${list.id}`} key={list.id}>
+          <Heading level={3}>{list.title}</Heading>
+        </Link>
       ))}
     </Box>
   )

@@ -9,7 +9,7 @@ export default function lists() {
     <Layout>
       <Box>
         <Heading level={1} margin="medium">
-          Lists
+          My Untrips
         </Heading>
         <Lists />
       </Box>

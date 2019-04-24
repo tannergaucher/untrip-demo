@@ -37,7 +37,7 @@ export default function TogglePlace({ gcmsId, name }) {
   if (error) return <Error error={error} />
 
   return (
-    <Box pad="large">
+    <Box margin={{ horizontal: "large" }}>
       {data.me.lists.map(list => (
         <Mutation
           mutation={TOGGLE_PLACE_MUTATION}

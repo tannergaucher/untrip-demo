@@ -4,8 +4,11 @@ import { graphql } from "gatsby"
 
 export default function event({ name }) {
   return (
-    <Box margin="medium" pad="medium" background="light-4">
-      <Heading>{name}</Heading>
+    <Box pad="medium" background="light-4">
+      <Heading level={4} margin="none" color="dark-3">
+        Event
+      </Heading>
+      <Heading level={3}>{name}</Heading>
     </Box>
   )
 }

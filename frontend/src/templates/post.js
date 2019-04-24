@@ -14,12 +14,6 @@ export default function post({ data }) {
       </Heading>
       <GraphImg image={data.gcms.post.image} maxWidth={900} />
 
-      <Text
-        size="large"
-        margin="medium"
-        dangerouslySetInnerHTML={{ __html: data.gcms.post.article.html }}
-      />
-
       {data.gcms.post.places &&
         data.gcms.post.places.map(place => {
           return <Place name={place.name} gcmsId={place.id} key={place.id} />
@@ -29,6 +23,12 @@ export default function post({ data }) {
         data.gcms.post.events.map(event => {
           return <Event name={event.name} key={event.id} />
         })}
+
+      <Text
+        size="large"
+        margin="medium"
+        dangerouslySetInnerHTML={{ __html: data.gcms.post.article.html }}
+      />
     </Layout>
   )
 }

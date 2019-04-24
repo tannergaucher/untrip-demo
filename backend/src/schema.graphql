@@ -39,6 +39,7 @@ type List {
 
 type Query {
   me: User
+  list(listId: ID!): List!
 }
 
 type Mutation {
