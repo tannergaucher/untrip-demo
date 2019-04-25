@@ -1,3 +1,9 @@
+enum Permission {
+  ADMIN
+  FREE_USER
+  PAID_LEVEL_ONE
+}
+
 type User {
   id: ID! @id
   name: String!
@@ -5,6 +11,7 @@ type User {
   password: String!
   lists: [List!]
   events: [Event!]
+  permissions: [Permission] @scalarList(strategy: RELATION)
 }
 
 type List {

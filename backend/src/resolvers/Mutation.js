@@ -1,7 +1,7 @@
 const { hash, compare } = require('bcrypt')
 const { sign } = require('jsonwebtoken')
-
 const { getUserId, AuthError } = require('../utils/getUserId')
+const { hasPermission } = require('../utils/hasPermission')
 
 const Mutation = {
   signup: async (parent, { name, email, password }, context) => {
@@ -10,7 +10,9 @@ const Mutation = {
       name,
       email,
       password: hashedPassword,
+      permissions: { set: ['FREE_USER'] },
     })
+
     const token = sign({ userId: user.id }, process.env.APP_SECRET)
     context.response.cookie('token', token, {
       httpOnly: true,

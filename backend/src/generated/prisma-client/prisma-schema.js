@@ -468,6 +468,12 @@ type PageInfo {
   endCursor: String
 }
 
+enum Permission {
+  ADMIN
+  FREE_USER
+  PAID_LEVEL_ONE
+}
+
 type Place {
   id: ID!
   gcmsId: String
@@ -717,6 +723,7 @@ type User {
   password: String!
   lists(where: ListWhereInput, orderBy: ListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [List!]
   events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event!]
+  permissions: [Permission!]!
 }
 
 type UserConnection {
@@ -732,6 +739,7 @@ input UserCreateInput {
   password: String!
   lists: ListCreateManyWithoutUserInput
   events: EventCreateManyWithoutUserInput
+  permissions: UserCreatepermissionsInput
 }
 
 input UserCreateOneWithoutEventsInput {
@@ -744,12 +752,17 @@ input UserCreateOneWithoutListsInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreatepermissionsInput {
+  set: [Permission!]
+}
+
 input UserCreateWithoutEventsInput {
   id: ID
   name: String!
   email: String!
   password: String!
   lists: ListCreateManyWithoutUserInput
+  permissions: UserCreatepermissionsInput
 }
 
 input UserCreateWithoutListsInput {
@@ -758,6 +771,7 @@ input UserCreateWithoutListsInput {
   email: String!
   password: String!
   events: EventCreateManyWithoutUserInput
+  permissions: UserCreatepermissionsInput
 }
 
 type UserEdge {
@@ -781,6 +795,7 @@ type UserPreviousValues {
   name: String!
   email: String!
   password: String!
+  permissions: [Permission!]!
 }
 
 type UserSubscriptionPayload {
@@ -807,12 +822,14 @@ input UserUpdateInput {
   password: String
   lists: ListUpdateManyWithoutUserInput
   events: EventUpdateManyWithoutUserInput
+  permissions: UserUpdatepermissionsInput
 }
 
 input UserUpdateManyMutationInput {
   name: String
   email: String
   password: String
+  permissions: UserUpdatepermissionsInput
 }
 
 input UserUpdateOneRequiredWithoutEventsInput {
@@ -829,11 +846,16 @@ input UserUpdateOneRequiredWithoutListsInput {
   connect: UserWhereUniqueInput
 }
 
+input UserUpdatepermissionsInput {
+  set: [Permission!]
+}
+
 input UserUpdateWithoutEventsDataInput {
   name: String
   email: String
   password: String
   lists: ListUpdateManyWithoutUserInput
+  permissions: UserUpdatepermissionsInput
 }
 
 input UserUpdateWithoutListsDataInput {
@@ -841,6 +863,7 @@ input UserUpdateWithoutListsDataInput {
   email: String
   password: String
   events: EventUpdateManyWithoutUserInput
+  permissions: UserUpdatepermissionsInput
 }
 
 input UserUpsertWithoutEventsInput {

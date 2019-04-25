@@ -60,7 +60,10 @@ function AccordionMenu() {
       <AccordionPanel label={<Heading level={2}>Profile</Heading>}>
         <Box pad="medium" background="light-2" margin={{ vertical: "medium" }}>
           <Link to="/my-lists">
-            <Heading level={3}>My Untrips</Heading>
+            <Heading level={3}>My Lists</Heading>
+          </Link>
+          <Link to="/app/lists">
+            <Heading level={3}>Browse All Lists</Heading>
           </Link>
           <Link to="/events">
             <Heading level={3}>Events</Heading>

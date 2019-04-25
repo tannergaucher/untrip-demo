@@ -14,8 +14,15 @@ type User {
   name: String!
   password: String!
   email: String!
+  permissions: [Permission]
   events: [Event!]!
   lists: [List!]!
+}
+
+enum Permission {
+  ADMIN
+  FREE_USER
+  PAID_LEVEL_ONE
 }
 
 type Place {

@@ -236,6 +236,8 @@ export type EventOrderByInput =
   | "gcmsId_ASC"
   | "gcmsId_DESC";
 
+export type Permission = "ADMIN" | "FREE_USER" | "PAID_LEVEL_ONE";
+
 export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -473,6 +475,7 @@ export interface UserCreateWithoutEventsInput {
   email: String;
   password: String;
   lists?: ListCreateManyWithoutUserInput;
+  permissions?: UserCreatepermissionsInput;
 }
 
 export interface ListCreateManyWithoutUserInput {
@@ -497,6 +500,10 @@ export interface PlaceCreateWithoutListInput {
   name?: String;
 }
 
+export interface UserCreatepermissionsInput {
+  set?: Permission[] | Permission;
+}
+
 export interface EventUpdateInput {
   gcmsId?: String;
   user?: UserUpdateOneRequiredWithoutEventsInput;
@@ -514,6 +521,7 @@ export interface UserUpdateWithoutEventsDataInput {
   email?: String;
   password?: String;
   lists?: ListUpdateManyWithoutUserInput;
+  permissions?: UserUpdatepermissionsInput;
 }
 
 export interface ListUpdateManyWithoutUserInput {
@@ -685,6 +693,10 @@ export interface ListUpdateManyDataInput {
   title?: String;
 }
 
+export interface UserUpdatepermissionsInput {
+  set?: Permission[] | Permission;
+}
+
 export interface UserUpsertWithoutEventsInput {
   update: UserUpdateWithoutEventsDataInput;
   create: UserCreateWithoutEventsInput;
@@ -712,6 +724,7 @@ export interface UserCreateWithoutListsInput {
   email: String;
   password: String;
   events?: EventCreateManyWithoutUserInput;
+  permissions?: UserCreatepermissionsInput;
 }
 
 export interface EventCreateManyWithoutUserInput {
@@ -742,6 +755,7 @@ export interface UserUpdateWithoutListsDataInput {
   email?: String;
   password?: String;
   events?: EventUpdateManyWithoutUserInput;
+  permissions?: UserUpdatepermissionsInput;
 }
 
 export interface EventUpdateManyWithoutUserInput {
@@ -882,6 +896,7 @@ export interface UserCreateInput {
   password: String;
   lists?: ListCreateManyWithoutUserInput;
   events?: EventCreateManyWithoutUserInput;
+  permissions?: UserCreatepermissionsInput;
 }
 
 export interface UserUpdateInput {
@@ -890,12 +905,14 @@ export interface UserUpdateInput {
   password?: String;
   lists?: ListUpdateManyWithoutUserInput;
   events?: EventUpdateManyWithoutUserInput;
+  permissions?: UserUpdatepermissionsInput;
 }
 
 export interface UserUpdateManyMutationInput {
   name?: String;
   email?: String;
   password?: String;
+  permissions?: UserUpdatepermissionsInput;
 }
 
 export interface EventSubscriptionWhereInput {
@@ -970,6 +987,7 @@ export interface User {
   name: String;
   email: String;
   password: String;
+  permissions: Permission[];
 }
 
 export interface UserPromise extends Promise<User>, Fragmentable {
@@ -995,6 +1013,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
     first?: Int;
     last?: Int;
   }) => T;
+  permissions: () => Promise<Permission[]>;
 }
 
 export interface UserSubscription
@@ -1022,6 +1041,7 @@ export interface UserSubscription
     first?: Int;
     last?: Int;
   }) => T;
+  permissions: () => Promise<AsyncIterator<Permission[]>>;
 }
 
 export interface List {
@@ -1503,6 +1523,7 @@ export interface UserPreviousValues {
   name: String;
   email: String;
   password: String;
+  permissions: Permission[];
 }
 
 export interface UserPreviousValuesPromise
@@ -1512,6 +1533,7 @@ export interface UserPreviousValuesPromise
   name: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
+  permissions: () => Promise<Permission[]>;
 }
 
 export interface UserPreviousValuesSubscription
@@ -1521,6 +1543,7 @@ export interface UserPreviousValuesSubscription
   name: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
+  permissions: () => Promise<AsyncIterator<Permission[]>>;
 }
 
 /*
@@ -1551,6 +1574,10 @@ export type Long = string;
  */
 
 export const models: Model[] = [
+  {
+    name: "Permission",
+    embedded: false
+  },
   {
     name: "User",
     embedded: false
