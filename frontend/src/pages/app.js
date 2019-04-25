@@ -2,12 +2,14 @@ import React from "react"
 import { Router } from "@reach/router"
 
 import Layout from "../components/layout"
-import List from "../components/list"
+import PublicList from "../components/publicList"
+import PublicLists from "../components/publicLists"
 
 const DynamicList = () => (
   <Layout>
     <Router>
-      <List path="/app/list/:listId" />
+      <PublicList path="/app/list/:listId" />
+      <PublicLists path="/app/lists" />
     </Router>
   </Layout>
 )

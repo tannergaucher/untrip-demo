@@ -3,7 +3,6 @@ import { Box, Layer, Heading, Button, Accordion, AccordionPanel } from "grommet"
 import { Menu, Close } from "grommet-icons"
 
 import Link from "../components/styles/link"
-import Logout from "../containers/logout"
 
 export default function menu() {
   const [show, setShow] = useState(false)
@@ -44,29 +43,29 @@ function AccordionMenu() {
   return (
     <Accordion alignSelf="stretch">
       <AccordionPanel label={<Heading level={2}>Food & Drink</Heading>}>
-        <Box pad="medium" background="light-2">
+        <Box pad="medium" background="light-2" margin={{ vertical: "medium" }}>
           <Heading level={3}>Map Subcategory</Heading>
         </Box>
       </AccordionPanel>
       <AccordionPanel label={<Heading level={2}>Music</Heading>}>
-        <Box pad="medium" background="light-2">
+        <Box pad="medium" background="light-2" margin={{ vertical: "medium" }}>
           <Heading level={3}>Map Subcategory</Heading>
         </Box>
       </AccordionPanel>
       <AccordionPanel label={<Heading level={2}>Culture</Heading>}>
-        <Box pad="medium" background="light-2">
+        <Box pad="medium" background="light-2" margin={{ vertical: "medium" }}>
           <Heading level={3}>Map Subcategory</Heading>
         </Box>
       </AccordionPanel>
       <AccordionPanel label={<Heading level={2}>Profile</Heading>}>
-        <Box pad="medium" background="light-2">
-          <Link to="/lists">
+        <Box pad="medium" background="light-2" margin={{ vertical: "medium" }}>
+          <Link to="/my-lists">
             <Heading level={3}>My Untrips</Heading>
           </Link>
           <Link to="/events">
             <Heading level={3}>Events</Heading>
           </Link>
-          <Logout />
+          <Heading level={3}>Log in / out</Heading>
         </Box>
       </AccordionPanel>
     </Accordion>

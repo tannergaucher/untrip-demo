@@ -1,7 +1,8 @@
 import React, { useState } from "react"
-import { Box, Layer, Button, Heading } from "grommet"
+import { Box, Layer, Button, Heading, TextArea } from "grommet"
 import { Add, Close } from "grommet-icons"
 import TogglePlace from "../containers/togglePlace"
+import CreateList from "../containers/createList"
 
 export default function listModal({ name, gcmsId }) {
   const [show, setShow] = useState(false)
@@ -34,9 +35,26 @@ export default function listModal({ name, gcmsId }) {
               <Heading level={2}>{`Add ${name} to My Untrip`}</Heading>
               <TogglePlace gcmsId={gcmsId} name={name} />
             </Box>
+            <Box margin="medium">
+              <Description />
+              <CreateList gcmsId={gcmsId} name={name} />
+            </Box>
           </Layer>
         </Box>
       )}
+    </>
+  )
+}
+
+function Description() {
+  const [value, setValue] = useState("")
+  return (
+    <>
+      <TextArea
+        placeholder="Optional description"
+        value={value}
+        onChange={e => setValue(e.target.value)}
+      />
     </>
   )
 }

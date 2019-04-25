@@ -1,10 +1,9 @@
 import React from "react"
-import { Box, Heading, CheckBox } from "grommet"
+import { Heading, CheckBox } from "grommet"
 import { useQuery } from "react-apollo-hooks"
 import { Mutation } from "react-apollo"
 import gql from "graphql-tag"
 
-import CreateList from "./createList"
 import Loading from "../components/loading"
 import Error from "../components/error"
 import { CURRENT_USER_QUERY } from "./user"
@@ -38,7 +37,7 @@ export default function TogglePlace({ gcmsId, name }) {
   return (
     <>
       {data.me.lists.length === 0 && (
-        <Heading level={3}>You don't have any lists yet. Make one 🏗️</Heading>
+        <Heading level={3}>You don't have any lists yet. Make one </Heading>
       )}
       {data.me.lists.map(list => (
         <Mutation
@@ -94,7 +93,6 @@ export default function TogglePlace({ gcmsId, name }) {
           )}
         </Mutation>
       ))}
-      <CreateList gcmsId={gcmsId} name={name} />
     </>
   )
 }

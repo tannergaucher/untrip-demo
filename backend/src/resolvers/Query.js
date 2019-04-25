@@ -7,15 +7,13 @@ const Query = {
     if (!userId) {
       return null
     }
-
     return context.prisma.user({ id: userId })
   },
   list: async (parent, { listId }, context) => {
-    // all lists are public for now
-    // TODO: render all lists where public === true
-    // if private, only let permissioned users see that list
-
     return context.prisma.list({ id: listId })
+  },
+  lists: async (parent, args, context) => {
+    return context.prisma.lists()
   },
 }
 

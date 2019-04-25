@@ -24,6 +24,12 @@ export default function ListEditMenu({ listId, listTitle }) {
               console.log("updateList mutation")
             },
           },
+          {
+            label: "Set to Private / Public",
+            onClick: () => {
+              console.log("setPrivate mutation")
+            },
+          },
         ]}
       />
       {confirm && (
