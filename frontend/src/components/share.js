@@ -1,6 +1,6 @@
 import React from "react"
 import { Box, Button } from "grommet"
-import { Facebook, Instagram, Twitter, Map } from "grommet-icons"
+import { Facebook, Instagram, Twitter } from "grommet-icons"
 
 export default function share() {
   return (
@@ -9,7 +9,6 @@ export default function share() {
         <Button icon={<Facebook size="small" />} />
         <Button icon={<Instagram size="small" />} />
         <Button icon={<Twitter size="small" />} />
-        <Button icon={<Map size="small" />} />
       </Box>
     </Box>
   )

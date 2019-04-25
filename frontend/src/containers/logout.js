@@ -23,7 +23,7 @@ export default function() {
         })
       }}
       label="Log Out"
-      margin={{ vertical: "large" }}
+      margin={{ vertical: "medium" }}
       plain
     />
   )

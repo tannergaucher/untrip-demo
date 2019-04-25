@@ -44,11 +44,9 @@ export default function list({ listId }) {
       </Box>
       <Box>
         {data.list.places.map(place => (
-          <>
-            <Heading key={place.id} level={4}>
-              <Link to={`/places/${kebabCase(place.name)}`}>{place.name}</Link>
-            </Heading>
-          </>
+          <Heading key={place.id} level={4}>
+            <Link to={`/places/${kebabCase(place.name)}`}>{place.name}</Link>
+          </Heading>
         ))}
       </Box>
     </Box>

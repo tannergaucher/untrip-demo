@@ -1,11 +1,10 @@
 import React, { useState } from "react"
 import { Box, Heading, Menu, Layer, Button } from "grommet"
-import { Edit, FormPreviousLink, Filter } from "grommet-icons"
+import { Edit, FormPreviousLink } from "grommet-icons"
 import gql from "graphql-tag"
 import { Mutation } from "react-apollo"
 
 import DeleteList from "../containers/deleteList"
-import { CURRENT_USER_QUERY } from "../containers/user"
 
 const TOGGLE_IS_PRIVATE_LIST_MUTATION = gql`
   mutation TOGGLE_IS_PRIVATE_LIST_MUTATION($listId: ID!) {
@@ -17,7 +16,7 @@ const TOGGLE_IS_PRIVATE_LIST_MUTATION = gql`
   }
 `
 
-export default function ListEditMenu({ listId, listTitle, isPrivate }) {
+export default function listEditMenu({ listId, listTitle, isPrivate }) {
   const [confirm, setConfirm] = useState(false)
 
   return (

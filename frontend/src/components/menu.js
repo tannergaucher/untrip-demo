@@ -3,6 +3,7 @@ import { Box, Layer, Heading, Button, Accordion, AccordionPanel } from "grommet"
 import { Menu, Close } from "grommet-icons"
 
 import Link from "../components/styles/link"
+import ToggleAuth from "../components/toggleAuth"
 
 export default function menu() {
   const [show, setShow] = useState(false)
@@ -17,6 +18,7 @@ export default function menu() {
             full="vertical"
             onClickOutside={() => setShow(false)}
             onEsc={() => setShow(false)}
+            style={{ overflowY: "scroll" }}
           >
             <Box justify="between" direction="row">
               <Heading level={3} margin="medium">
@@ -68,7 +70,7 @@ function AccordionMenu() {
           <Link to="/events">
             <Heading level={3}>Events</Heading>
           </Link>
-          <Heading level={3}>Log in / out</Heading>
+          <ToggleAuth />
         </Box>
       </AccordionPanel>
     </Accordion>

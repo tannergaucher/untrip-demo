@@ -35,8 +35,7 @@ export default function lists() {
           margin={{ vertical: "medium" }}
         >
           <Box direction="row" align="center">
-            <Share />
-            {list.isPrivate && <Text>PRIVATE</Text>}
+            {list.isPrivate ? <Text>Private</Text> : <Share />}
           </Box>
           <Box direction="row">
             <Heading level={2}>{list.title}</Heading>
