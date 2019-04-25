@@ -3,14 +3,17 @@ import { Heading } from "grommet"
 
 import Layout from "../components/layout"
 import Lists from "../components/lists"
+import PleaseLogin from "../containers/pleaseLogin"
 
 export default function lists() {
   return (
     <Layout>
-      <Heading level={1} margin="medium">
-        My Untrips
-      </Heading>
-      <Lists />
+      <PleaseLogin>
+        <Heading level={1} margin="medium">
+          My Untrips
+        </Heading>
+        <Lists />
+      </PleaseLogin>
     </Layout>
   )
 }
