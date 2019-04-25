@@ -11,6 +11,7 @@ const CURRENT_USER_QUERY = gql`
       lists {
         id
         title
+        isPrivate
         places {
           id
           gcmsId

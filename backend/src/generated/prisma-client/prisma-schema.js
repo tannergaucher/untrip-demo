@@ -210,6 +210,7 @@ type List {
   title: String!
   places(where: PlaceWhereInput, orderBy: PlaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Place!]
   user: User!
+  isPrivate: Boolean
 }
 
 type ListConnection {
@@ -223,6 +224,7 @@ input ListCreateInput {
   title: String!
   places: PlaceCreateManyWithoutListInput
   user: UserCreateOneWithoutListsInput!
+  isPrivate: Boolean
 }
 
 input ListCreateManyWithoutUserInput {
@@ -239,12 +241,14 @@ input ListCreateWithoutPlacesInput {
   id: ID
   title: String!
   user: UserCreateOneWithoutListsInput!
+  isPrivate: Boolean
 }
 
 input ListCreateWithoutUserInput {
   id: ID
   title: String!
   places: PlaceCreateManyWithoutListInput
+  isPrivate: Boolean
 }
 
 type ListEdge {
@@ -257,11 +261,14 @@ enum ListOrderByInput {
   id_DESC
   title_ASC
   title_DESC
+  isPrivate_ASC
+  isPrivate_DESC
 }
 
 type ListPreviousValues {
   id: ID!
   title: String!
+  isPrivate: Boolean
 }
 
 input ListScalarWhereInput {
@@ -293,6 +300,8 @@ input ListScalarWhereInput {
   title_not_starts_with: String
   title_ends_with: String
   title_not_ends_with: String
+  isPrivate: Boolean
+  isPrivate_not: Boolean
   AND: [ListScalarWhereInput!]
   OR: [ListScalarWhereInput!]
   NOT: [ListScalarWhereInput!]
@@ -320,14 +329,17 @@ input ListUpdateInput {
   title: String
   places: PlaceUpdateManyWithoutListInput
   user: UserUpdateOneRequiredWithoutListsInput
+  isPrivate: Boolean
 }
 
 input ListUpdateManyDataInput {
   title: String
+  isPrivate: Boolean
 }
 
 input ListUpdateManyMutationInput {
   title: String
+  isPrivate: Boolean
 }
 
 input ListUpdateManyWithoutUserInput {
@@ -357,11 +369,13 @@ input ListUpdateOneRequiredWithoutPlacesInput {
 input ListUpdateWithoutPlacesDataInput {
   title: String
   user: UserUpdateOneRequiredWithoutListsInput
+  isPrivate: Boolean
 }
 
 input ListUpdateWithoutUserDataInput {
   title: String
   places: PlaceUpdateManyWithoutListInput
+  isPrivate: Boolean
 }
 
 input ListUpdateWithWhereUniqueWithoutUserInput {
@@ -413,6 +427,8 @@ input ListWhereInput {
   places_some: PlaceWhereInput
   places_none: PlaceWhereInput
   user: UserWhereInput
+  isPrivate: Boolean
+  isPrivate_not: Boolean
   AND: [ListWhereInput!]
   OR: [ListWhereInput!]
   NOT: [ListWhereInput!]

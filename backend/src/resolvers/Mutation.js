@@ -99,11 +99,9 @@ const Mutation = {
   },
   togglePlace: async (parent, { listId, gcmsId, name }, context) => {
     const userId = getUserId(context)
-
     if (!userId) {
       throw new AuthError()
     }
-
     // query users list of listId for a place with gcmsId of gcmsId
     const [existing] = await context.prisma
       .user({ id: userId })
@@ -147,6 +145,41 @@ const Mutation = {
           },
         },
       })
+    }
+  },
+  toggleIsPrivateList: async (parent, { listId }, context) => {
+    const userId = getUserId(context)
+    if (!userId) {
+      throw new AuthError()
+    }
+    // get the users list of id listId
+    const [list] = await context.prisma.user({ id: userId }).lists({
+      where: {
+        id: listId,
+      },
+    })
+    // if list is private, set isPrivate to false
+    if (list.isPrivate) {
+      const list = await context.prisma.updateList({
+        where: {
+          id: listId,
+        },
+        data: {
+          isPrivate: false,
+        },
+      })
+      return list
+    } else {
+      // if list isn't private, set to private
+      const list = await context.prisma.updateList({
+        where: {
+          id: listId,
+        },
+        data: {
+          isPrivate: true,
+        },
+      })
+      return list
     }
   },
 }

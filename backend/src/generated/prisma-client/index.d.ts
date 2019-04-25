@@ -220,7 +220,9 @@ export type ListOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "title_ASC"
-  | "title_DESC";
+  | "title_DESC"
+  | "isPrivate_ASC"
+  | "isPrivate_DESC";
 
 export type PlaceOrderByInput =
   | "id_ASC"
@@ -288,6 +290,8 @@ export interface ListWhereInput {
   places_some?: PlaceWhereInput;
   places_none?: PlaceWhereInput;
   user?: UserWhereInput;
+  isPrivate?: Boolean;
+  isPrivate_not?: Boolean;
   AND?: ListWhereInput[] | ListWhereInput;
   OR?: ListWhereInput[] | ListWhereInput;
   NOT?: ListWhereInput[] | ListWhereInput;
@@ -487,6 +491,7 @@ export interface ListCreateWithoutUserInput {
   id?: ID_Input;
   title: String;
   places?: PlaceCreateManyWithoutListInput;
+  isPrivate?: Boolean;
 }
 
 export interface PlaceCreateManyWithoutListInput {
@@ -550,6 +555,7 @@ export interface ListUpdateWithWhereUniqueWithoutUserInput {
 export interface ListUpdateWithoutUserDataInput {
   title?: String;
   places?: PlaceUpdateManyWithoutListInput;
+  isPrivate?: Boolean;
 }
 
 export interface PlaceUpdateManyWithoutListInput {
@@ -679,6 +685,8 @@ export interface ListScalarWhereInput {
   title_not_starts_with?: String;
   title_ends_with?: String;
   title_not_ends_with?: String;
+  isPrivate?: Boolean;
+  isPrivate_not?: Boolean;
   AND?: ListScalarWhereInput[] | ListScalarWhereInput;
   OR?: ListScalarWhereInput[] | ListScalarWhereInput;
   NOT?: ListScalarWhereInput[] | ListScalarWhereInput;
@@ -691,6 +699,7 @@ export interface ListUpdateManyWithWhereNestedInput {
 
 export interface ListUpdateManyDataInput {
   title?: String;
+  isPrivate?: Boolean;
 }
 
 export interface UserUpdatepermissionsInput {
@@ -711,6 +720,7 @@ export interface ListCreateInput {
   title: String;
   places?: PlaceCreateManyWithoutListInput;
   user: UserCreateOneWithoutListsInput;
+  isPrivate?: Boolean;
 }
 
 export interface UserCreateOneWithoutListsInput {
@@ -741,6 +751,7 @@ export interface ListUpdateInput {
   title?: String;
   places?: PlaceUpdateManyWithoutListInput;
   user?: UserUpdateOneRequiredWithoutListsInput;
+  isPrivate?: Boolean;
 }
 
 export interface UserUpdateOneRequiredWithoutListsInput {
@@ -841,6 +852,7 @@ export interface UserUpsertWithoutListsInput {
 
 export interface ListUpdateManyMutationInput {
   title?: String;
+  isPrivate?: Boolean;
 }
 
 export interface PlaceCreateInput {
@@ -859,6 +871,7 @@ export interface ListCreateWithoutPlacesInput {
   id?: ID_Input;
   title: String;
   user: UserCreateOneWithoutListsInput;
+  isPrivate?: Boolean;
 }
 
 export interface PlaceUpdateInput {
@@ -877,6 +890,7 @@ export interface ListUpdateOneRequiredWithoutPlacesInput {
 export interface ListUpdateWithoutPlacesDataInput {
   title?: String;
   user?: UserUpdateOneRequiredWithoutListsInput;
+  isPrivate?: Boolean;
 }
 
 export interface ListUpsertWithoutPlacesInput {
@@ -1047,6 +1061,7 @@ export interface UserSubscription
 export interface List {
   id: ID_Output;
   title: String;
+  isPrivate?: Boolean;
 }
 
 export interface ListPromise extends Promise<List>, Fragmentable {
@@ -1062,6 +1077,7 @@ export interface ListPromise extends Promise<List>, Fragmentable {
     last?: Int;
   }) => T;
   user: <T = UserPromise>() => T;
+  isPrivate: () => Promise<Boolean>;
 }
 
 export interface ListSubscription
@@ -1079,6 +1095,7 @@ export interface ListSubscription
     last?: Int;
   }) => T;
   user: <T = UserSubscription>() => T;
+  isPrivate: () => Promise<AsyncIterator<Boolean>>;
 }
 
 export interface Place {
@@ -1430,6 +1447,7 @@ export interface ListSubscriptionPayloadSubscription
 export interface ListPreviousValues {
   id: ID_Output;
   title: String;
+  isPrivate?: Boolean;
 }
 
 export interface ListPreviousValuesPromise
@@ -1437,6 +1455,7 @@ export interface ListPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   title: () => Promise<String>;
+  isPrivate: () => Promise<Boolean>;
 }
 
 export interface ListPreviousValuesSubscription
@@ -1444,6 +1463,7 @@ export interface ListPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   title: () => Promise<AsyncIterator<String>>;
+  isPrivate: () => Promise<AsyncIterator<Boolean>>;
 }
 
 export interface PlaceSubscriptionPayload {
@@ -1558,14 +1578,14 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 export type String = string;
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
-*/
-export type Int = number;
-
-/*
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
+
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+*/
+export type Int = number;
 
 export type Long = string;
 

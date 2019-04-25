@@ -42,6 +42,7 @@ type List {
   title: String!
   places: [Place!]!
   user: User
+  isPrivate: Boolean
 }
 
 type Query {
@@ -58,4 +59,5 @@ type Mutation {
   createList(title: String!, gcmsId: String!, name: String!): List
   deleteList(listId: ID!): List
   togglePlace(listId: ID!, gcmsId: String!, name: String!): Place
+  toggleIsPrivateList(listId: ID!): List
 }

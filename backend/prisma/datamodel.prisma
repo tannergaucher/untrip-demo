@@ -19,6 +19,7 @@ type List {
   title: String!
   places: [Place!] @relation(name: "PlacesOfList", onDelete: CASCADE)
   user: User!
+  isPrivate: Boolean @default(value: false)
 }
 
 type Place {

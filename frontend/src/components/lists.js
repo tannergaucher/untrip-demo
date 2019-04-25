@@ -28,24 +28,25 @@ export default function lists() {
   return (
     <Box>
       {data.me.lists.map(list => (
-        // REFACTOR TO LIST COMPONENT. CHANGE NAME OF EXISTING LIST TO PUBLIC LIST
         <Box
           key={list.id}
           background="light-2"
           pad="small"
           margin={{ vertical: "medium" }}
         >
-          {/* <Link to={`/app/list/${list.id}`}> */}
-
           <Box direction="row" align="center">
             <Share />
+            {list.isPrivate && <Text>PRIVATE</Text>}
           </Box>
           <Box direction="row">
             <Heading level={2}>{list.title}</Heading>
-            <ListEditMenu listId={list.id} listTitle={list.title} />
+            <ListEditMenu
+              listId={list.id}
+              listTitle={list.title}
+              isPrivate={list.isPrivate}
+            />
           </Box>
           <Places places={list.places} />
-          {/* </Link> */}
         </Box>
       ))}
     </Box>
@@ -61,7 +62,6 @@ const Places = ({ places }) => (
         </Text>
       }
     >
-      {/*  */}
       <Box
         background="light-1"
         round="medium"

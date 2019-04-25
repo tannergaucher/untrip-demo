@@ -14,6 +14,7 @@ const CREATE_LIST_MUTATION = gql`
     createList(title: $title, gcmsId: $gcmsId, name: $name) {
       id
       title
+      isPrivate
       places {
         id
         gcmsId
@@ -54,6 +55,7 @@ export default function createList({ gcmsId, name }) {
               __typename: "List",
               id: new Date(),
               title: title,
+              isPrivate: false,
               places: [
                 {
                   __typename: "Place",
