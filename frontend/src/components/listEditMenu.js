@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Box, Heading, Menu, Layer, Button } from "grommet"
+import { Box, Heading, Menu, Layer, Button, Form, FormField } from "grommet"
 import { Edit, FormPreviousLink } from "grommet-icons"
 import gql from "graphql-tag"
 import { Mutation } from "react-apollo"
@@ -16,8 +16,19 @@ const TOGGLE_IS_PRIVATE_LIST_MUTATION = gql`
   }
 `
 
+const UPDATE_LIST_TITLE_MUTATION = gql`
+  mutation UPDATE_LIST_TITLE_MUTATION($listId: ID!, $newTitle: String!) {
+    updateListTitle(listId: $listId, newTitle: $newTitle) {
+      id
+      title
+    }
+  }
+`
+
 export default function listEditMenu({ listId, listTitle, isPrivate }) {
   const [confirm, setConfirm] = useState(false)
+  const [show, setShow] = useState(false)
+  const [value, setValue] = useState("")
 
   return (
     <>
@@ -48,14 +59,13 @@ export default function listEditMenu({ listId, listTitle, isPrivate }) {
                 {
                   label: "Rename",
                   onClick: () => {
-                    console.log("updateList mutation")
+                    setShow(true)
                   },
                 },
                 {
-                  label: `Set to ${isPrivate ? "Public" : "Private"}`,
+                  label: `Make ${isPrivate ? "Public" : "Private"}`,
                   onClick: () => {
                     toggleIsPrivate()
-                    console.log("setPrivate mutation")
                   },
                 },
               ]}
@@ -79,6 +89,49 @@ export default function listEditMenu({ listId, listTitle, isPrivate }) {
                   <DeleteList setConfirm={setConfirm} listId={listId} />
                 </Box>
               </Layer>
+            )}
+            {show && (
+              <Mutation
+                mutation={UPDATE_LIST_TITLE_MUTATION}
+                variables={{ listId, newTitle: value }}
+                optimisticResponse={{
+                  __typename: "Mutation",
+                  updateListTitle: {
+                    __typename: "List",
+                    id: listId,
+                    title: value,
+                  },
+                }}
+              >
+                {updateListTitle => (
+                  <Layer
+                    responsive={false}
+                    onClickOutside={() => setShow(false)}
+                    onEsc={() => setShow(false)}
+                  >
+                    <Box pad="medium">
+                      <Heading level={4}>Rename {listTitle}</Heading>
+                      <Form
+                        onSubmit={e => {
+                          e.preventDefault()
+                          updateListTitle()
+                          setShow(false)
+                        }}
+                      >
+                        <FormField
+                          value={value}
+                          onChange={e => setValue(e.target.value)}
+                        />
+                        <Button
+                          label="Update"
+                          margin={{ vertical: "medium" }}
+                          type="submit"
+                        />
+                      </Form>
+                    </Box>
+                  </Layer>
+                )}
+              </Mutation>
             )}
           </>
         )}

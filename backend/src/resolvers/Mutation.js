@@ -182,6 +182,24 @@ const Mutation = {
       return list
     }
   },
+  updateListTitle: async (parent, { listId, newTitle }, context) => {
+    const userId = getUserId(context)
+
+    if (!userId) {
+      throw new AuthError()
+    }
+
+    const list = await context.prisma.updateList({
+      where: {
+        id: listId,
+      },
+      data: {
+        title: newTitle,
+      },
+    })
+
+    return list
+  },
 }
 
 module.exports = {

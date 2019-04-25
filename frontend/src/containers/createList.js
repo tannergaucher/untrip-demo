@@ -82,6 +82,14 @@ export default function createList({ gcmsId, name }) {
                 onChange={e => setTitle(e.target.value)}
               />
               <Button
+                label="Undo"
+                color="dark-4"
+                onClick={() => {
+                  setShow(false)
+                  setTitle("")
+                }}
+              />
+              <Button
                 type="submit"
                 label="Save"
                 margin={{ vertical: "small" }}

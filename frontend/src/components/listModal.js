@@ -36,25 +36,11 @@ export default function listModal({ name, gcmsId }) {
               <TogglePlace gcmsId={gcmsId} name={name} />
             </Box>
             <Box margin="medium">
-              <Description />
               <CreateList gcmsId={gcmsId} name={name} />
             </Box>
           </Layer>
         </Box>
       )}
-    </>
-  )
-}
-
-function Description() {
-  const [value, setValue] = useState("")
-  return (
-    <>
-      <TextArea
-        placeholder="Optional description"
-        value={value}
-        onChange={e => setValue(e.target.value)}
-      />
     </>
   )
 }
