@@ -13,7 +13,13 @@ const Query = {
     return context.prisma.list({ id: listId })
   },
   lists: async (parent, args, context) => {
-    return context.prisma.lists()
+    const lists = await context.prisma.lists({
+      where: {
+        isPrivate: false,
+      },
+    })
+
+    return lists
   },
 }
 
