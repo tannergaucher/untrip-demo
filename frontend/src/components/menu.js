@@ -1,7 +1,9 @@
 import React, { useState } from "react"
 import { Box, Layer, Heading, Button, Accordion, AccordionPanel } from "grommet"
 import { Menu, Close } from "grommet-icons"
+
 import Link from "../components/styles/link"
+import Logout from "../containers/logout"
 
 export default function menu() {
   const [show, setShow] = useState(false)
@@ -64,7 +66,7 @@ function AccordionMenu() {
           <Link to="/events">
             <Heading level={3}>Events</Heading>
           </Link>
-          <Heading level={3}>Log Out</Heading>
+          <Logout />
         </Box>
       </AccordionPanel>
     </Accordion>

@@ -8,7 +8,7 @@ export default function listModal({ name, gcmsId }) {
   return (
     <>
       <Button
-        label="Add To List"
+        label="Add To Untrip"
         onClick={() => setShow(true)}
         icon={<Add size="small" />}
         alignSelf="start"
@@ -30,10 +30,10 @@ export default function listModal({ name, gcmsId }) {
               alignSelf="end"
               onClick={() => setShow(false)}
             />
-            <Heading level={2} margin="large">
-              {`Add ${name} to List`}
-            </Heading>
-            <TogglePlace gcmsId={gcmsId} name={name} />
+            <Box pad="large">
+              <Heading level={2}>{`Add ${name} to My Untrip`}</Heading>
+              <TogglePlace gcmsId={gcmsId} name={name} />
+            </Box>
           </Layer>
         </Box>
       )}

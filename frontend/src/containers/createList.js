@@ -31,7 +31,7 @@ export default function createList({ gcmsId, name }) {
     <>
       {!show && (
         <Button
-          label="New List"
+          label="New"
           icon={<Add size="small" />}
           onClick={() => setShow(true)}
           alignSelf="start"
@@ -79,7 +79,11 @@ export default function createList({ gcmsId, name }) {
                 value={title}
                 onChange={e => setTitle(e.target.value)}
               />
-              <Button type="submit" label="Save LIST" />
+              <Button
+                type="submit"
+                label="Save"
+                margin={{ vertical: "small" }}
+              />
             </Form>
           )}
         </Mutation>

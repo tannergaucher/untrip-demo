@@ -1,6 +1,5 @@
-import React, { useState } from "react"
-import { Box, Heading, CheckBox, Menu, Layer, Button } from "grommet"
-import { Edit, FormPreviousLink } from "grommet-icons"
+import React from "react"
+import { Box, Heading, CheckBox } from "grommet"
 import { useQuery } from "react-apollo-hooks"
 import { Mutation } from "react-apollo"
 import gql from "graphql-tag"
@@ -8,8 +7,8 @@ import gql from "graphql-tag"
 import CreateList from "./createList"
 import Loading from "../components/loading"
 import Error from "../components/error"
-import DeleteList from "./deleteList"
 import { CURRENT_USER_QUERY } from "./user"
+import ListEditMenu from "../components/ListEditMenu"
 
 const TOGGLE_PLACE_MUTATION = gql`
   mutation TOGGLE_PLACE_MUTATION(
@@ -37,7 +36,10 @@ export default function TogglePlace({ gcmsId, name }) {
   if (error) return <Error error={error} />
 
   return (
-    <Box margin={{ horizontal: "large" }}>
+    <>
+      {data.me.lists.length === 0 && (
+        <Heading level={3}>You don't have any lists yet. Make one 🏗️</Heading>
+      )}
       {data.me.lists.map(list => (
         <Mutation
           mutation={TOGGLE_PLACE_MUTATION}
@@ -79,7 +81,7 @@ export default function TogglePlace({ gcmsId, name }) {
                 label={
                   <>
                     <Heading level={3}>{list.title}</Heading>
-                    <ListMenu listId={list.id} />
+                    <ListEditMenu listId={list.id} listTitle={list.title} />
                   </>
                 }
                 checked={isPlaceInList(gcmsId, list.places)}
@@ -93,45 +95,6 @@ export default function TogglePlace({ gcmsId, name }) {
         </Mutation>
       ))}
       <CreateList gcmsId={gcmsId} name={name} />
-    </Box>
-  )
-}
-
-function ListMenu({ listId }) {
-  const [confirm, setConfirm] = useState(false)
-  return (
-    <>
-      <Menu
-        icon={<Edit size="small" />}
-        items={[
-          {
-            label: "Delete list",
-            onClick: () => {
-              setConfirm(true)
-            },
-          },
-        ]}
-      />
-      {confirm && (
-        <Layer
-          onEsc={() => setConfirm(false)}
-          onClickOutside={() => setConfirm(false)}
-          responsive={false}
-        >
-          <Heading level={4} margin="medium">
-            Are you sure you want to delete LIST NAME?
-          </Heading>
-          <Box direction="row" margin="medium">
-            <Button
-              label="Back"
-              margin="medium"
-              icon={<FormPreviousLink size="small" />}
-              onClick={() => setConfirm(false)}
-            />
-            <DeleteList setConfirm={setConfirm} listId={listId} />
-          </Box>
-        </Layer>
-      )}
     </>
   )
 }
