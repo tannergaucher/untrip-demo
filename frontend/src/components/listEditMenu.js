@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Box, Heading, Menu, Layer, Button } from "grommet"
-import { Edit, FormPreviousLink } from "grommet-icons"
+import { Edit, FormPreviousLink, Filter } from "grommet-icons"
 import gql from "graphql-tag"
 import { Mutation } from "react-apollo"
 
@@ -25,8 +25,14 @@ export default function ListEditMenu({ listId, listTitle, isPrivate }) {
       <Mutation
         mutation={TOGGLE_IS_PRIVATE_LIST_MUTATION}
         variables={{ listId }}
-        update={(cache, payload) => {
-          console.log("update")
+        optimisticResponse={{
+          __typename: "Mutation",
+          toggleIsPrivateList: {
+            __typename: "List",
+            id: listId,
+            title: listTitle,
+            isPrivate: !isPrivate,
+          },
         }}
       >
         {toggleIsPrivate => (
