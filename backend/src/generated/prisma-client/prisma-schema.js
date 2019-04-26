@@ -494,6 +494,7 @@ type Place {
   id: ID!
   gcmsId: String
   name: String
+  image: String
   list: List!
 }
 
@@ -507,6 +508,7 @@ input PlaceCreateInput {
   id: ID
   gcmsId: String
   name: String
+  image: String
   list: ListCreateOneWithoutPlacesInput!
 }
 
@@ -519,6 +521,7 @@ input PlaceCreateWithoutListInput {
   id: ID
   gcmsId: String
   name: String
+  image: String
 }
 
 type PlaceEdge {
@@ -533,12 +536,15 @@ enum PlaceOrderByInput {
   gcmsId_DESC
   name_ASC
   name_DESC
+  image_ASC
+  image_DESC
 }
 
 type PlacePreviousValues {
   id: ID!
   gcmsId: String
   name: String
+  image: String
 }
 
 input PlaceScalarWhereInput {
@@ -584,6 +590,20 @@ input PlaceScalarWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
+  image: String
+  image_not: String
+  image_in: [String!]
+  image_not_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_gt: String
+  image_gte: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
   AND: [PlaceScalarWhereInput!]
   OR: [PlaceScalarWhereInput!]
   NOT: [PlaceScalarWhereInput!]
@@ -610,17 +630,20 @@ input PlaceSubscriptionWhereInput {
 input PlaceUpdateInput {
   gcmsId: String
   name: String
+  image: String
   list: ListUpdateOneRequiredWithoutPlacesInput
 }
 
 input PlaceUpdateManyDataInput {
   gcmsId: String
   name: String
+  image: String
 }
 
 input PlaceUpdateManyMutationInput {
   gcmsId: String
   name: String
+  image: String
 }
 
 input PlaceUpdateManyWithoutListInput {
@@ -643,6 +666,7 @@ input PlaceUpdateManyWithWhereNestedInput {
 input PlaceUpdateWithoutListDataInput {
   gcmsId: String
   name: String
+  image: String
 }
 
 input PlaceUpdateWithWhereUniqueWithoutListInput {
@@ -699,6 +723,20 @@ input PlaceWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
+  image: String
+  image_not: String
+  image_in: [String!]
+  image_not_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_gt: String
+  image_gte: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
   list: ListWhereInput
   AND: [PlaceWhereInput!]
   OR: [PlaceWhereInput!]

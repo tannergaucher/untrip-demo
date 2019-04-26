@@ -14,11 +14,13 @@ const TOGGLE_PLACE_MUTATION = gql`
     $listId: ID!
     $gcmsId: String!
     $name: String!
+    $image: String
   ) {
-    togglePlace(listId: $listId, gcmsId: $gcmsId, name: $name) {
+    togglePlace(listId: $listId, gcmsId: $gcmsId, name: $name, image: $image) {
       id
       gcmsId
       name
+      image
     }
   }
 `
@@ -28,8 +30,9 @@ function isPlaceInList(gcmsId, places) {
   return isPlace.length ? true : false
 }
 
-export default function TogglePlace({ gcmsId, name }) {
-  const { data, loading, error } = useQuery(CURRENT_USER_QUERY)
+export default function TogglePlace({ gcmsId, name, image }) {
+  const { data, loading, error } = useQuery(CURRENT_USER_QUERY
+  const imageString = JSON.stringify(image)
 
   if (loading) return <Loading />
   if (error) return <Error error={error} />
@@ -42,7 +45,7 @@ export default function TogglePlace({ gcmsId, name }) {
       {data.me.lists.map(list => (
         <Mutation
           mutation={TOGGLE_PLACE_MUTATION}
-          variables={{ listId: list.id, gcmsId, name }}
+          variables={{ listId: list.id, gcmsId, name, image: imageString }}
           key={list.id}
           update={(cache, payload) => {
             const data = cache.readQuery({ query: CURRENT_USER_QUERY })
@@ -59,6 +62,7 @@ export default function TogglePlace({ gcmsId, name }) {
             } else {
               payload.data.togglePlace.gcmsId = gcmsId
               payload.data.togglePlace.name = name
+              payload.data.togglePlace.image = imageString
               myList.places.push(payload.data.togglePlace)
             }
             cache.writeQuery({ query: CURRENT_USER_QUERY, data })
@@ -71,6 +75,7 @@ export default function TogglePlace({ gcmsId, name }) {
               id: new Date(),
               gcmsId,
               name,
+              image: imageString,
             },
           }}
         >

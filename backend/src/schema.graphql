@@ -1,4 +1,5 @@
 scalar DateTime
+scalar Json
 
 type SuccessMessage {
   message: String
@@ -30,6 +31,7 @@ type Place {
   gcmsId: String
   list: List!
   name: String
+  image: String
 }
 
 type Event {
@@ -56,9 +58,14 @@ type Mutation {
   login(email: String!, password: String): AuthPayload!
   logout: SuccessMessage
   toggleEvent(gcmsId: String!): Event
-  createList(title: String!, gcmsId: String!, name: String!): List
+  createList(
+    title: String!
+    gcmsId: String!
+    name: String!
+    image: String
+  ): List
   deleteList(listId: ID!): List
-  togglePlace(listId: ID!, gcmsId: String!, name: String!): Place
+  togglePlace(listId: ID!, gcmsId: String!, name: String!, image: String): Place
   toggleIsPrivateList(listId: ID!): List
   updateListTitle(listId: ID!, newTitle: String!): List
 }

@@ -16,11 +16,20 @@ export default function post({ data }) {
 
       {data.gcms.post.places &&
         data.gcms.post.places.map(place => {
-          return <Place name={place.name} gcmsId={place.id} key={place.id} />
+          return (
+            <Place
+              // CHANGE TO place={place}
+              name={place.name}
+              gcmsId={place.id}
+              image={place.featuredImage}
+              key={place.id}
+            />
+          )
         })}
 
       {data.gcms.post.events &&
         data.gcms.post.events.map(event => {
+          // CHANGE TO event={event}
           return <Event name={event.name} key={event.id} />
         })}
 

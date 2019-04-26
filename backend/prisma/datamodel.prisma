@@ -26,6 +26,7 @@ type Place {
   id: ID! @id
   gcmsId: String
   name: String
+  image: String
   list: List! @relation(name: "PlacesOfList")
 }
 

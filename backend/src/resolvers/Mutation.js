@@ -73,7 +73,7 @@ const Mutation = {
       return event
     }
   },
-  createList: async (parent, { title, gcmsId, name }, context) => {
+  createList: async (parent, { title, gcmsId, name, image }, context) => {
     const userId = getUserId(context)
     if (!userId) {
       throw new AuthError()
@@ -84,6 +84,7 @@ const Mutation = {
         create: {
           gcmsId: gcmsId,
           name: name,
+          image: image,
         },
       },
       user: {
@@ -97,7 +98,7 @@ const Mutation = {
   deleteList: (parent, { listId }, context) => {
     return context.prisma.deleteList({ id: listId })
   },
-  togglePlace: async (parent, { listId, gcmsId, name }, context) => {
+  togglePlace: async (parent, { listId, gcmsId, name, image }, context) => {
     const userId = getUserId(context)
     if (!userId) {
       throw new AuthError()
@@ -141,6 +142,7 @@ const Mutation = {
             create: {
               gcmsId: gcmsId,
               name: name,
+              image: image,
             },
           },
         },

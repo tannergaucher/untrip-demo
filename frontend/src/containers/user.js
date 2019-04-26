@@ -16,6 +16,7 @@ const CURRENT_USER_QUERY = gql`
           id
           gcmsId
           name
+          image
         }
       }
     }

@@ -230,7 +230,9 @@ export type PlaceOrderByInput =
   | "gcmsId_ASC"
   | "gcmsId_DESC"
   | "name_ASC"
-  | "name_DESC";
+  | "name_DESC"
+  | "image_ASC"
+  | "image_DESC";
 
 export type EventOrderByInput =
   | "id_ASC"
@@ -340,6 +342,20 @@ export interface PlaceWhereInput {
   name_not_starts_with?: String;
   name_ends_with?: String;
   name_not_ends_with?: String;
+  image?: String;
+  image_not?: String;
+  image_in?: String[] | String;
+  image_not_in?: String[] | String;
+  image_lt?: String;
+  image_lte?: String;
+  image_gt?: String;
+  image_gte?: String;
+  image_contains?: String;
+  image_not_contains?: String;
+  image_starts_with?: String;
+  image_not_starts_with?: String;
+  image_ends_with?: String;
+  image_not_ends_with?: String;
   list?: ListWhereInput;
   AND?: PlaceWhereInput[] | PlaceWhereInput;
   OR?: PlaceWhereInput[] | PlaceWhereInput;
@@ -503,6 +519,7 @@ export interface PlaceCreateWithoutListInput {
   id?: ID_Input;
   gcmsId?: String;
   name?: String;
+  image?: String;
 }
 
 export interface UserCreatepermissionsInput {
@@ -584,6 +601,7 @@ export interface PlaceUpdateWithWhereUniqueWithoutListInput {
 export interface PlaceUpdateWithoutListDataInput {
   gcmsId?: String;
   name?: String;
+  image?: String;
 }
 
 export interface PlaceUpsertWithWhereUniqueWithoutListInput {
@@ -635,6 +653,20 @@ export interface PlaceScalarWhereInput {
   name_not_starts_with?: String;
   name_ends_with?: String;
   name_not_ends_with?: String;
+  image?: String;
+  image_not?: String;
+  image_in?: String[] | String;
+  image_not_in?: String[] | String;
+  image_lt?: String;
+  image_lte?: String;
+  image_gt?: String;
+  image_gte?: String;
+  image_contains?: String;
+  image_not_contains?: String;
+  image_starts_with?: String;
+  image_not_starts_with?: String;
+  image_ends_with?: String;
+  image_not_ends_with?: String;
   AND?: PlaceScalarWhereInput[] | PlaceScalarWhereInput;
   OR?: PlaceScalarWhereInput[] | PlaceScalarWhereInput;
   NOT?: PlaceScalarWhereInput[] | PlaceScalarWhereInput;
@@ -648,6 +680,7 @@ export interface PlaceUpdateManyWithWhereNestedInput {
 export interface PlaceUpdateManyDataInput {
   gcmsId?: String;
   name?: String;
+  image?: String;
 }
 
 export interface ListUpsertWithWhereUniqueWithoutUserInput {
@@ -859,6 +892,7 @@ export interface PlaceCreateInput {
   id?: ID_Input;
   gcmsId?: String;
   name?: String;
+  image?: String;
   list: ListCreateOneWithoutPlacesInput;
 }
 
@@ -877,6 +911,7 @@ export interface ListCreateWithoutPlacesInput {
 export interface PlaceUpdateInput {
   gcmsId?: String;
   name?: String;
+  image?: String;
   list?: ListUpdateOneRequiredWithoutPlacesInput;
 }
 
@@ -901,6 +936,7 @@ export interface ListUpsertWithoutPlacesInput {
 export interface PlaceUpdateManyMutationInput {
   gcmsId?: String;
   name?: String;
+  image?: String;
 }
 
 export interface UserCreateInput {
@@ -1102,12 +1138,14 @@ export interface Place {
   id: ID_Output;
   gcmsId?: String;
   name?: String;
+  image?: String;
 }
 
 export interface PlacePromise extends Promise<Place>, Fragmentable {
   id: () => Promise<ID_Output>;
   gcmsId: () => Promise<String>;
   name: () => Promise<String>;
+  image: () => Promise<String>;
   list: <T = ListPromise>() => T;
 }
 
@@ -1117,6 +1155,7 @@ export interface PlaceSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   gcmsId: () => Promise<AsyncIterator<String>>;
   name: () => Promise<AsyncIterator<String>>;
+  image: () => Promise<AsyncIterator<String>>;
   list: <T = ListSubscription>() => T;
 }
 
@@ -1495,6 +1534,7 @@ export interface PlacePreviousValues {
   id: ID_Output;
   gcmsId?: String;
   name?: String;
+  image?: String;
 }
 
 export interface PlacePreviousValuesPromise
@@ -1503,6 +1543,7 @@ export interface PlacePreviousValuesPromise
   id: () => Promise<ID_Output>;
   gcmsId: () => Promise<String>;
   name: () => Promise<String>;
+  image: () => Promise<String>;
 }
 
 export interface PlacePreviousValuesSubscription
@@ -1511,6 +1552,7 @@ export interface PlacePreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   gcmsId: () => Promise<AsyncIterator<String>>;
   name: () => Promise<AsyncIterator<String>>;
+  image: () => Promise<AsyncIterator<String>>;
 }
 
 export interface UserSubscriptionPayload {

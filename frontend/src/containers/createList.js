@@ -10,8 +10,9 @@ const CREATE_LIST_MUTATION = gql`
     $title: String!
     $gcmsId: String!
     $name: String!
+    $image: String
   ) {
-    createList(title: $title, gcmsId: $gcmsId, name: $name) {
+    createList(title: $title, gcmsId: $gcmsId, name: $name, image: $image) {
       id
       title
       isPrivate
@@ -19,14 +20,17 @@ const CREATE_LIST_MUTATION = gql`
         id
         gcmsId
         name
+        image
       }
     }
   }
 `
 
-export default function createList({ gcmsId, name }) {
+export default function createList({ gcmsId, name, image }) {
   const [show, setShow] = useState(false)
   const [title, setTitle] = useState("")
+
+  const imageString = JSON.stringify(image)
 
   return (
     <>
@@ -43,7 +47,7 @@ export default function createList({ gcmsId, name }) {
       {show && (
         <Mutation
           mutation={CREATE_LIST_MUTATION}
-          variables={{ title, gcmsId, name }}
+          variables={{ title, gcmsId, name, image: imageString }}
           update={(cache, payload) => {
             const data = cache.readQuery({ query: CURRENT_USER_QUERY })
             data.me.lists = [...data.me.lists, ...payload.data.createList]
@@ -62,6 +66,7 @@ export default function createList({ gcmsId, name }) {
                   id: new Date(),
                   gcmsId: gcmsId,
                   name: name,
+                  image: imageString,
                 },
               ],
             },

@@ -1,6 +1,7 @@
 import React from "react"
 import { useQuery } from "react-apollo-hooks"
 import { Box, Heading, Text, Accordion, AccordionPanel } from "grommet"
+import GraphImg from "graphcms-image"
 
 import { CURRENT_USER_QUERY } from "../containers/user"
 import Loading from "../components/loading"
@@ -69,11 +70,33 @@ const Places = ({ places }) => (
         elevation="small"
       >
         {places.map(place => (
-          <Heading key={place.name} level={5}>
-            {place.name}
-          </Heading>
+          <Place place={place} key={place.id} />
         ))}
       </Box>
     </AccordionPanel>
   </Accordion>
 )
+
+function Place({ place }) {
+  const { data, loading, error } = useQuery(CURRENT_USER_QUERY)
+
+  if (loading) return <Loading />
+  if (error) return <Error error={error} />
+
+  console.log(place)
+
+  return (
+    <>
+      <Heading key={place.name} level={5}>
+        {place.name}
+      </Heading>
+      {place.image && (
+        <GraphImg
+          image={JSON.parse(place.image)}
+          maxWidth={100}
+          style={{ width: "100px" }}
+        />
+      )}
+    </>
+  )
+}

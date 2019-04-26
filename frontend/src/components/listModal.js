@@ -1,11 +1,14 @@
 import React, { useState } from "react"
 import { Box, Layer, Button, Heading, TextArea } from "grommet"
 import { Add, Close } from "grommet-icons"
+import GraphImg from "graphcms-image"
+
 import TogglePlace from "../containers/togglePlace"
 import CreateList from "../containers/createList"
 
-export default function listModal({ name, gcmsId }) {
+export default function listModal({ name, gcmsId, image }) {
   const [show, setShow] = useState(false)
+
   return (
     <>
       <Button
@@ -32,11 +35,12 @@ export default function listModal({ name, gcmsId }) {
               onClick={() => setShow(false)}
             />
             <Box pad="large">
+              <GraphImg image={image} />
               <Heading level={2}>{`Add ${name} to My Untrip`}</Heading>
-              <TogglePlace gcmsId={gcmsId} name={name} />
+              <TogglePlace gcmsId={gcmsId} name={name} image={image} />
             </Box>
             <Box margin="medium">
-              <CreateList gcmsId={gcmsId} name={name} />
+              <CreateList gcmsId={gcmsId} name={name} image={image} />
             </Box>
           </Layer>
         </Box>
