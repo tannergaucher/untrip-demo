@@ -47,7 +47,7 @@ const Mutation = {
     context.response.clearCookie('token')
     return { message: 'Goodbye' }
   },
-  toggleEvent: async (parent, { gcmsId }, context) => {
+  toggleEvent: async (parent, { gcmsId, name, image }, context) => {
     const userId = getUserId(context)
 
     const [existingEvent] = await context.prisma.user({ id: userId }).events({
@@ -59,6 +59,8 @@ const Mutation = {
     if (!existingEvent) {
       const event = await context.prisma.createEvent({
         gcmsId: gcmsId,
+        name: name,
+        image: image,
         user: {
           connect: {
             id: userId,

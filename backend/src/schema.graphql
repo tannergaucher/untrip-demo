@@ -36,7 +36,9 @@ type Place {
 
 type Event {
   id: ID!
-  gsmcId: String!
+  gcmsId: String!
+  name: String
+  image: String
 }
 
 type List {
@@ -57,7 +59,7 @@ type Mutation {
   signup(email: String!, password: String!, name: String!): AuthPayload!
   login(email: String!, password: String): AuthPayload!
   logout: SuccessMessage
-  toggleEvent(gcmsId: String!): Event
+  toggleEvent(gcmsId: String!, name: String, image: String): Event
   createList(
     title: String!
     gcmsId: String!

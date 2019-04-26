@@ -34,4 +34,6 @@ type Event {
   id: ID! @id
   gcmsId: String! @unique
   user: User!
+  name: String
+  image: String
 }

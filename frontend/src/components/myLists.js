@@ -20,7 +20,7 @@ function formatted(places) {
   return `${places.length} Places`
 }
 
-export default function lists() {
+export default function myLists() {
   const { data, loading, error } = useQuery(CURRENT_USER_QUERY)
 
   if (loading) return <Loading />

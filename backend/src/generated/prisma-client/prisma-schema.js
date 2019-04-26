@@ -27,6 +27,8 @@ type Event {
   id: ID!
   gcmsId: String!
   user: User!
+  name: String
+  image: String
 }
 
 type EventConnection {
@@ -39,6 +41,8 @@ input EventCreateInput {
   id: ID
   gcmsId: String!
   user: UserCreateOneWithoutEventsInput!
+  name: String
+  image: String
 }
 
 input EventCreateManyWithoutUserInput {
@@ -49,6 +53,8 @@ input EventCreateManyWithoutUserInput {
 input EventCreateWithoutUserInput {
   id: ID
   gcmsId: String!
+  name: String
+  image: String
 }
 
 type EventEdge {
@@ -61,11 +67,17 @@ enum EventOrderByInput {
   id_DESC
   gcmsId_ASC
   gcmsId_DESC
+  name_ASC
+  name_DESC
+  image_ASC
+  image_DESC
 }
 
 type EventPreviousValues {
   id: ID!
   gcmsId: String!
+  name: String
+  image: String
 }
 
 input EventScalarWhereInput {
@@ -97,6 +109,34 @@ input EventScalarWhereInput {
   gcmsId_not_starts_with: String
   gcmsId_ends_with: String
   gcmsId_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  image: String
+  image_not: String
+  image_in: [String!]
+  image_not_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_gt: String
+  image_gte: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
   AND: [EventScalarWhereInput!]
   OR: [EventScalarWhereInput!]
   NOT: [EventScalarWhereInput!]
@@ -123,14 +163,20 @@ input EventSubscriptionWhereInput {
 input EventUpdateInput {
   gcmsId: String
   user: UserUpdateOneRequiredWithoutEventsInput
+  name: String
+  image: String
 }
 
 input EventUpdateManyDataInput {
   gcmsId: String
+  name: String
+  image: String
 }
 
 input EventUpdateManyMutationInput {
   gcmsId: String
+  name: String
+  image: String
 }
 
 input EventUpdateManyWithoutUserInput {
@@ -152,6 +198,8 @@ input EventUpdateManyWithWhereNestedInput {
 
 input EventUpdateWithoutUserDataInput {
   gcmsId: String
+  name: String
+  image: String
 }
 
 input EventUpdateWithWhereUniqueWithoutUserInput {
@@ -195,6 +243,34 @@ input EventWhereInput {
   gcmsId_ends_with: String
   gcmsId_not_ends_with: String
   user: UserWhereInput
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  image: String
+  image_not: String
+  image_in: [String!]
+  image_not_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_gt: String
+  image_gte: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
   AND: [EventWhereInput!]
   OR: [EventWhereInput!]
   NOT: [EventWhereInput!]

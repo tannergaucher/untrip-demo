@@ -12,7 +12,7 @@ export default function listPlace({ place }) {
         maxWidth={100}
         style={{ width: "100px" }}
       />
-      <Link to={`/places/${kebabCase(place.name)}`}>
+      <Link to={`/place/${kebabCase(place.name)}`}>
         <Heading level={2}>{place.name}</Heading>
       </Link>
     </Box>

@@ -238,7 +238,11 @@ export type EventOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "gcmsId_ASC"
-  | "gcmsId_DESC";
+  | "gcmsId_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "image_ASC"
+  | "image_DESC";
 
 export type Permission = "ADMIN" | "FREE_USER" | "PAID_LEVEL_ONE";
 
@@ -460,6 +464,34 @@ export interface EventWhereInput {
   gcmsId_ends_with?: String;
   gcmsId_not_ends_with?: String;
   user?: UserWhereInput;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  image?: String;
+  image_not?: String;
+  image_in?: String[] | String;
+  image_not_in?: String[] | String;
+  image_lt?: String;
+  image_lte?: String;
+  image_gt?: String;
+  image_gte?: String;
+  image_contains?: String;
+  image_not_contains?: String;
+  image_starts_with?: String;
+  image_not_starts_with?: String;
+  image_ends_with?: String;
+  image_not_ends_with?: String;
   AND?: EventWhereInput[] | EventWhereInput;
   OR?: EventWhereInput[] | EventWhereInput;
   NOT?: EventWhereInput[] | EventWhereInput;
@@ -482,6 +514,8 @@ export interface EventCreateInput {
   id?: ID_Input;
   gcmsId: String;
   user: UserCreateOneWithoutEventsInput;
+  name?: String;
+  image?: String;
 }
 
 export interface UserCreateOneWithoutEventsInput {
@@ -529,6 +563,8 @@ export interface UserCreatepermissionsInput {
 export interface EventUpdateInput {
   gcmsId?: String;
   user?: UserUpdateOneRequiredWithoutEventsInput;
+  name?: String;
+  image?: String;
 }
 
 export interface UserUpdateOneRequiredWithoutEventsInput {
@@ -746,6 +782,8 @@ export interface UserUpsertWithoutEventsInput {
 
 export interface EventUpdateManyMutationInput {
   gcmsId?: String;
+  name?: String;
+  image?: String;
 }
 
 export interface ListCreateInput {
@@ -778,6 +816,8 @@ export interface EventCreateManyWithoutUserInput {
 export interface EventCreateWithoutUserInput {
   id?: ID_Input;
   gcmsId: String;
+  name?: String;
+  image?: String;
 }
 
 export interface ListUpdateInput {
@@ -827,6 +867,8 @@ export interface EventUpdateWithWhereUniqueWithoutUserInput {
 
 export interface EventUpdateWithoutUserDataInput {
   gcmsId?: String;
+  name?: String;
+  image?: String;
 }
 
 export interface EventUpsertWithWhereUniqueWithoutUserInput {
@@ -864,6 +906,34 @@ export interface EventScalarWhereInput {
   gcmsId_not_starts_with?: String;
   gcmsId_ends_with?: String;
   gcmsId_not_ends_with?: String;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  image?: String;
+  image_not?: String;
+  image_in?: String[] | String;
+  image_not_in?: String[] | String;
+  image_lt?: String;
+  image_lte?: String;
+  image_gt?: String;
+  image_gte?: String;
+  image_contains?: String;
+  image_not_contains?: String;
+  image_starts_with?: String;
+  image_not_starts_with?: String;
+  image_ends_with?: String;
+  image_not_ends_with?: String;
   AND?: EventScalarWhereInput[] | EventScalarWhereInput;
   OR?: EventScalarWhereInput[] | EventScalarWhereInput;
   NOT?: EventScalarWhereInput[] | EventScalarWhereInput;
@@ -876,6 +946,8 @@ export interface EventUpdateManyWithWhereNestedInput {
 
 export interface EventUpdateManyDataInput {
   gcmsId?: String;
+  name?: String;
+  image?: String;
 }
 
 export interface UserUpsertWithoutListsInput {
@@ -1016,12 +1088,16 @@ export interface NodeNode {
 export interface Event {
   id: ID_Output;
   gcmsId: String;
+  name?: String;
+  image?: String;
 }
 
 export interface EventPromise extends Promise<Event>, Fragmentable {
   id: () => Promise<ID_Output>;
   gcmsId: () => Promise<String>;
   user: <T = UserPromise>() => T;
+  name: () => Promise<String>;
+  image: () => Promise<String>;
 }
 
 export interface EventSubscription
@@ -1030,6 +1106,8 @@ export interface EventSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   gcmsId: () => Promise<AsyncIterator<String>>;
   user: <T = UserSubscription>() => T;
+  name: () => Promise<AsyncIterator<String>>;
+  image: () => Promise<AsyncIterator<String>>;
 }
 
 export interface User {
@@ -1442,6 +1520,8 @@ export interface EventSubscriptionPayloadSubscription
 export interface EventPreviousValues {
   id: ID_Output;
   gcmsId: String;
+  name?: String;
+  image?: String;
 }
 
 export interface EventPreviousValuesPromise
@@ -1449,6 +1529,8 @@ export interface EventPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   gcmsId: () => Promise<String>;
+  name: () => Promise<String>;
+  image: () => Promise<String>;
 }
 
 export interface EventPreviousValuesSubscription
@@ -1456,6 +1538,8 @@ export interface EventPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   gcmsId: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+  image: () => Promise<AsyncIterator<String>>;
 }
 
 export interface ListSubscriptionPayload {

@@ -1,6 +1,6 @@
 /*
-Example of a component that queries the CMS at build time using gatsby's static query.
-*/
+ * Example of a component that queries the CMS at build time using gatsby's static query.
+ */
 
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"

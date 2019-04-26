@@ -1,15 +1,17 @@
 import React from "react"
 import { Box, Heading } from "grommet"
 import { graphql } from "gatsby"
+import { kebabCase } from "lodash"
+
 import ListModal from "./listModal"
+import Link from "./styles/link"
 
 export default function place({ place }) {
   return (
     <Box pad="large" background="light-4">
-      <Heading level={4} margin="none" color="dark-3">
-        Place
-      </Heading>
-      <Heading level={3}>{place.name}</Heading>
+      <Link to={`/place/${kebabCase(place.name)}`}>
+        <Heading level={3}>{place.name}</Heading>
+      </Link>
       <ListModal place={place} />
     </Box>
   )

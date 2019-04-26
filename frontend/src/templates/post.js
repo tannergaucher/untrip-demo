@@ -22,8 +22,7 @@ export default function post({ data }) {
 
       {data.gcms.post.events &&
         data.gcms.post.events.map(event => {
-          // CHANGE TO event={event}
-          return <Event name={event.name} key={event.id} />
+          return <Event event={event} key={event.id} />
         })}
 
       <Text

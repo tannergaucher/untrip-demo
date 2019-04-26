@@ -67,8 +67,11 @@ function AccordionMenu() {
           <Link to="/app/lists">
             <Heading level={3}>Browse All Lists</Heading>
           </Link>
+          <Link to="/my-events">
+            <Heading level={3}>My Events</Heading>
+          </Link>
           <Link to="/events">
-            <Heading level={3}>Events</Heading>
+            <Heading level={3}>Browse All Events</Heading>
           </Link>
           <ToggleAuth />
         </Box>
