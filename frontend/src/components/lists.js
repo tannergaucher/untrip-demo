@@ -77,13 +77,12 @@ const Places = ({ places }) => (
   </Accordion>
 )
 
+// CHANGE TO listPlace component
 function Place({ place }) {
-  const { data, loading, error } = useQuery(CURRENT_USER_QUERY)
+  const { loading, error } = useQuery(CURRENT_USER_QUERY)
 
   if (loading) return <Loading />
   if (error) return <Error error={error} />
-
-  console.log(place)
 
   return (
     <>

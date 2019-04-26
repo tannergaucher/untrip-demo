@@ -1,5 +1,6 @@
 import React from "react"
 import { Heading, Text } from "grommet"
+import { graphql } from "gatsby"
 import GraphImg from "graphcms-image"
 
 import Layout from "../components/layout"
@@ -16,15 +17,7 @@ export default function post({ data }) {
 
       {data.gcms.post.places &&
         data.gcms.post.places.map(place => {
-          return (
-            <Place
-              // CHANGE TO place={place}
-              name={place.name}
-              gcmsId={place.id}
-              image={place.featuredImage}
-              key={place.id}
-            />
-          )
+          return <Place place={place} key={place.id} />
         })}
 
       {data.gcms.post.events &&

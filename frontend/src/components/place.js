@@ -3,14 +3,14 @@ import { Box, Heading } from "grommet"
 import { graphql } from "gatsby"
 import ListModal from "./listModal"
 
-export default function place({ name, gcmsId, image }) {
+export default function place({ place }) {
   return (
     <Box pad="large" background="light-4">
       <Heading level={4} margin="none" color="dark-3">
         Place
       </Heading>
-      <Heading level={3}>{name}</Heading>
-      <ListModal gcmsId={gcmsId} name={name} image={image} />
+      <Heading level={3}>{place.name}</Heading>
+      <ListModal place={place} />
     </Box>
   )
 }
