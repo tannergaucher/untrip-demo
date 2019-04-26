@@ -31,7 +31,7 @@ function isPlaceInList(gcmsId, places) {
 }
 
 export default function TogglePlace({ gcmsId, name, image }) {
-  const { data, loading, error } = useQuery(CURRENT_USER_QUERY
+  const { data, loading, error } = useQuery(CURRENT_USER_QUERY)
   const imageString = JSON.stringify(image)
 
   if (loading) return <Loading />
