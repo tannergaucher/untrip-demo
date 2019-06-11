@@ -4,7 +4,9 @@ import { Box, Heading } from "grommet"
 export default function footer() {
   return (
     <Box direction="row" justify="around" background="light-1">
-      <Heading level={5}>Untrip</Heading>
+      <Heading level={5} margin="small">
+        Untrip
+      </Heading>
     </Box>
   )
 }

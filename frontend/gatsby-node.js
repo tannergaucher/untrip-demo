@@ -20,11 +20,19 @@ exports.createPages = ({ graphql, actions }) => {
             id
             name
           }
+          categories {
+            id
+            category
+            tags {
+              id
+              tag
+            }
+          }
         }
       }
     `)
       .then(result => {
-        const { posts, places, events } = result.data.gcms
+        const { posts, places, events, categories } = result.data.gcms
 
         posts.map(post => {
           createPage({
@@ -54,6 +62,31 @@ exports.createPages = ({ graphql, actions }) => {
               id: event.id,
             },
           })
+        })
+
+        categories.map(category => {
+          createPage({
+            path: `/${_.kebabCase(category.category)}`,
+            component: path.resolve(`./src/templates/category.js`),
+            context: {
+              id: category.id,
+            },
+          })
+
+          // nested create /:category/:tag page
+          const { tags } = category
+          tags.map(tag => {
+            createPage({
+              path: `/${_.kebabCase(category.category)}/${_.kebabCase(
+                tag.tag
+              )}`,
+              component: path.resolve(`./src/templates/tag.js`),
+              context: {
+                id: tag.id,
+              },
+            })
+          })
+          //
         })
 
         resolve()

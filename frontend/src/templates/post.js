@@ -1,5 +1,5 @@
 import React from "react"
-import { Heading, Text } from "grommet"
+import { Heading, Text, Box } from "grommet"
 import { graphql } from "gatsby"
 import GraphImg from "graphcms-image"
 
@@ -10,10 +10,10 @@ import Event from "../components/event"
 export default function post({ data }) {
   return (
     <Layout>
+      <GraphImg image={data.gcms.post.image} maxWidth={900} />
       <Heading margin="medium" level={1}>
         {data.gcms.post.title}
       </Heading>
-      <GraphImg image={data.gcms.post.image} maxWidth={900} />
 
       {data.gcms.post.places &&
         data.gcms.post.places.map(place => {
@@ -27,7 +27,7 @@ export default function post({ data }) {
 
       <Text
         size="large"
-        margin="medium"
+        margin="small"
         dangerouslySetInnerHTML={{ __html: data.gcms.post.article.html }}
       />
     </Layout>

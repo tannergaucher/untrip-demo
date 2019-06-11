@@ -60,10 +60,11 @@ export default function TogglePlace({ gcmsId, name, image }) {
                 place => !place.gcmsId === gcmsId
               )
             } else {
-              payload.data.togglePlace.gcmsId = gcmsId
-              payload.data.togglePlace.name = name
-              payload.data.togglePlace.image = imageString
-              myList.places.push(payload.data.togglePlace)
+              const { togglePlace } = payload.data
+              togglePlace.gcmsId = gcmsId
+              togglePlace.name = name
+              togglePlace.image = imageString
+              myList.places.push(togglePlace)
             }
             cache.writeQuery({ query: CURRENT_USER_QUERY, data })
           }}

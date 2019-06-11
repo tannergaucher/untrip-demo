@@ -16,17 +16,9 @@ export default function PostsList() {
   `)
 
   return (
-    <Box margin={{ vertical: "large" }}>
+    <Box>
       {gcms.posts.map(post => {
-        return (
-          <Post
-            title={post.title}
-            key={post.id}
-            image={post.image}
-            category={post.category.category}
-            tags={post.tags}
-          />
-        )
+        return <Post post={post} key={post.id} />
       })}
     </Box>
   )

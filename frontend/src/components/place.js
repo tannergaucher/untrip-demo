@@ -8,7 +8,7 @@ import Link from "./styles/link"
 
 export default function place({ place }) {
   return (
-    <Box pad="large" background="light-4">
+    <Box pad="medium" background="light-2">
       <Link to={`/place/${kebabCase(place.name)}`}>
         <Heading level={3}>{place.name}</Heading>
       </Link>

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Frank+Ruhl+Libre:400,900");
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,400,700");
 
 html {
   -ms-text-size-adjust: 100%;
@@ -10,7 +10,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior: none;
-  font-family: "Frank Ruhl Libre", serif;
+  font-family: "Poppins", sans-serif;
 }
 
 p {

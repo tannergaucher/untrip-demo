@@ -5,23 +5,17 @@ import GraphImg from "graphcms-image"
 import { kebabCase } from "lodash"
 import { graphql } from "gatsby"
 
-export default function Post({ title, image, category }) {
+export default function Post({ post }) {
   return (
     <Link
-      to={`/posts/${kebabCase(title)}`}
+      to={`/posts/${kebabCase(post.title)}`}
       style={{ textDecoration: "none", color: "inherit" }}
     >
-      <Box margin={{ vertical: "medium" }} elevation="">
-        <Heading level={1} margin="medium">
-          {title}
+      <Box margin={{ vertical: "large", horizontal: "small" }}>
+        <GraphImg image={post.image} maxWidth={300} />
+        <Heading level={2} margin={{ vertical: "small" }}>
+          {post.title}
         </Heading>
-        <GraphImg image={image} maxWidth={300} />
-
-        <Box direction="row">
-          <Heading level={6} margin="medium">
-            {category}
-          </Heading>
-        </Box>
       </Box>
     </Link>
   )

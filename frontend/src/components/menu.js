@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 import { Box, Layer, Heading, Button, Accordion, AccordionPanel } from "grommet"
 import { Menu, Close } from "grommet-icons"
+import { useStaticQuery, graphql } from "gatsby"
+import { kebabCase } from "lodash"
 
 import Link from "../components/styles/link"
 import ToggleAuth from "../components/toggleAuth"
@@ -42,40 +44,79 @@ export default function menu() {
 }
 
 function AccordionMenu() {
+  const { gcms } = useStaticQuery(graphql`
+    query menuQuery {
+      gcms {
+        categories {
+          id
+          category
+          tags {
+            id
+            tag
+          }
+        }
+      }
+    }
+  `)
+
   return (
     <Accordion alignSelf="stretch">
-      <AccordionPanel label={<Heading level={2}>Food & Drink</Heading>}>
-        <Box pad="medium" background="light-2" margin={{ vertical: "medium" }}>
-          <Heading level={3}>Map Subcategory</Heading>
-        </Box>
-      </AccordionPanel>
-      <AccordionPanel label={<Heading level={2}>Music</Heading>}>
-        <Box pad="medium" background="light-2" margin={{ vertical: "medium" }}>
-          <Heading level={3}>Map Subcategory</Heading>
-        </Box>
-      </AccordionPanel>
-      <AccordionPanel label={<Heading level={2}>Culture</Heading>}>
-        <Box pad="medium" background="light-2" margin={{ vertical: "medium" }}>
-          <Heading level={3}>Map Subcategory</Heading>
-        </Box>
-      </AccordionPanel>
-      <AccordionPanel label={<Heading level={2}>Profile</Heading>}>
-        <Box pad="medium" background="light-2" margin={{ vertical: "medium" }}>
-          <Link to="/my-lists">
-            <Heading level={3}>My Lists</Heading>
-          </Link>
-          <Link to="/app/lists">
-            <Heading level={3}>Browse All Lists</Heading>
-          </Link>
-          <Link to="/my-events">
-            <Heading level={3}>My Events</Heading>
-          </Link>
-          <Link to="/events">
-            <Heading level={3}>Browse All Events</Heading>
-          </Link>
-          <ToggleAuth />
-        </Box>
-      </AccordionPanel>
+      {gcms.categories.map(category => (
+        <Category category={category} key={category.id} />
+      ))}
+      <Profile />
     </Accordion>
+  )
+}
+
+function Category({ category }) {
+  // TODO: make a set of tags arr to handle duplicate tags
+
+  return (
+    <AccordionPanel label={<Heading level={2}>{category.category}</Heading>}>
+      <Box pad="medium" background="light-2" margin={{ vertical: "medium" }}>
+        <Link to={`/${kebabCase(category.category)}`}>
+          <Heading level={3} color="black">
+            All Posts
+          </Heading>
+        </Link>
+        <Link to={`/`}>
+          <Heading level={3} color="black">
+            All Places
+          </Heading>
+        </Link>
+        {/* TAGS */}
+        {category.tags.map(tag => (
+          <Link
+            key={tag.id}
+            to={`/${kebabCase(category.category)}/${kebabCase(tag.tag)}`}
+          >
+            <Heading level={3}>#{tag.tag}</Heading>
+          </Link>
+        ))}
+      </Box>
+    </AccordionPanel>
+  )
+}
+
+function Profile() {
+  return (
+    <AccordionPanel label={<Heading level={2}>Profile</Heading>}>
+      <Box pad="medium" background="light-2" margin={{ vertical: "medium" }}>
+        <Link to="/my-lists">
+          <Heading level={3}>My Lists</Heading>
+        </Link>
+        <Link to="/app/lists">
+          <Heading level={3}>Browse All Lists</Heading>
+        </Link>
+        <Link to="/my-events">
+          <Heading level={3}>My Events</Heading>
+        </Link>
+        <Link to="/events">
+          <Heading level={3}>Browse All Events</Heading>
+        </Link>
+        <ToggleAuth />
+      </Box>
+    </AccordionPanel>
   )
 }

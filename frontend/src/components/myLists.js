@@ -8,6 +8,7 @@ import Loading from "../components/loading"
 import Error from "../components/error"
 import ListEditMenu from "../components/listEditMenu"
 import Share from "../components/share"
+import ListPlace from "../components/listPlace"
 
 function formatted(places) {
   if (places.length === 0) {
@@ -46,6 +47,7 @@ export default function myLists() {
               isPrivate={list.isPrivate}
             />
           </Box>
+
           <Places places={list.places} />
         </Box>
       ))}
@@ -53,6 +55,7 @@ export default function myLists() {
   )
 }
 
+// DELETE THIS WHOLE THING
 const Places = ({ places }) => (
   <Accordion>
     <AccordionPanel
@@ -70,6 +73,7 @@ const Places = ({ places }) => (
         elevation="small"
       >
         {places.map(place => (
+          // CHANGE TO LISTPLAC
           <Place place={place} key={place.id} />
         ))}
       </Box>
@@ -77,7 +81,7 @@ const Places = ({ places }) => (
   </Accordion>
 )
 
-// CHANGE TO listPlace component
+// CHANGE TO LISTPLACE COMPONENT
 function Place({ place }) {
   const { loading, error } = useQuery(CURRENT_USER_QUERY)
 
