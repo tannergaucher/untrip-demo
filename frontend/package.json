@@ -20,7 +20,7 @@
     "grommet": "^2.6.5",
     "grommet-icons": "^4.2.0",
     "isomorphic-fetch": "^2.2.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-apollo": "^2.5.4",
